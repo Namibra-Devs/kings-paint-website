@@ -112,10 +112,10 @@ const InspireSection = () => {
             className="text-center mb-12"
           >
             <h2 className="font-['Saira_Extra_Condensed'] text-5xl lg:text-7xl font-black text-white uppercase tracking-[-0.02em] mb-4">
-              Inspiring Ideas <span className="text-[#C4A962]">For You</span>
+              Inspiring Ideas <span className="text-white">For You</span>
             </h2>
             
-            <p className="text-[#C4A962] text-lg mt-6 max-w-2xl mx-auto">
+            <p className="text-amber-800 text-lg mt-6 max-w-2xl mx-auto">
               Discover creative projects and expert techniques
             </p>
           </motion.div>

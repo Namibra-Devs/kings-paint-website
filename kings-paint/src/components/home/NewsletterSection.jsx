@@ -102,11 +102,11 @@ const ContactSection = () => {
           viewport={{ once: true }}
           className="text-center mb-12"
         >
-          <span className="text-[#8B6B4D] text-sm font-medium uppercase tracking-[0.2em] mb-3 block">
+          <span className="text-amber-800 text-sm font-medium uppercase tracking-[0.2em] mb-3 block">
             Get in Touch
           </span>
           <h2 className="text-3xl lg:text-4xl font-light text-gray-900 mb-3">
-            Let's <span className="font-semibold text-[#8B6B4D]">Connect</span>
+            Let's <span className="font-semibold text-amber-800">Connect</span>
           </h2>
 
           <p className="text-gray-500 text-sm mt-4 max-w-2xl mx-auto">
@@ -142,7 +142,7 @@ const ContactSection = () => {
                 className="group bg-white p-5 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 cursor-pointer"
               >
                 <div className="flex items-start gap-3">
-                  <div className="w-10 h-10 rounded-full bg-[#8B6B4D]/10 flex items-center justify-center group-hover:bg-[#8B6B4D] transition-colors duration-300">
+                  <div className="w-10 h-10 rounded-full bg-amber-800/10 flex items-center justify-center group-hover:bg-amber-800 transition-colors duration-300">
                     <Icon className="w-5 h-5 text-[#8B6B4D] group-hover:text-white transition-colors duration-300" />
                   </div>
                   <div>
@@ -244,7 +244,7 @@ const ContactSection = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-white text-[#8B6B4D] px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full bg-white text-[#8B6B4D] px-6 py-3 rounded-lg font-semibold hover:bg-amber-800 hover:text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 >
                   {isSubmitting ? 'Subscribing...' : 'Subscribe'}
                 </button>

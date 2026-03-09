@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 import DesktopNav from '@components/navigation/DesktopNav'
 import MobileNav from '@components/navigation/MobileNav'
 import Footer from '@components/Footer'
-import PopupMessage from '@components/PopupMessage'
+// import PopupMessage from '@components/PopupMessage'
 
 const MainLayout = () => {
   return (
@@ -12,7 +12,7 @@ const MainLayout = () => {
       <MobileNav />
       
       {/* Popup Message Component */}
-      <PopupMessage />
+      {/* <PopupMessage /> */}
       
       {/* Main Content */}
       <main className="flex-grow">

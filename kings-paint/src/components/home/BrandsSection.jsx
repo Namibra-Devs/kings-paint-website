@@ -104,11 +104,11 @@ const BrandsSection = () => {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="text-[#C4A962] text-sm font-medium uppercase tracking-[0.3em] mb-3 block">
+          <span className="text-amber-800 text-sm font-medium uppercase tracking-[0.3em] mb-3 block">
             Trusted Partners
           </span>
           <h2 className="font-['Saira_Extra_Condensed'] text-5xl lg:text-6xl font-black text-white mb-4">
-            Brands We <span className="text-[#C4A962]">Proudly</span> Represent
+            Brands We <span className="text-amber-800">Proudly</span> Represent
           </h2>
          
           <p className="text-gray-400 text-sm mt-6 max-w-2xl mx-auto">
@@ -133,14 +133,14 @@ const BrandsSection = () => {
                 key={index}
                 variants={itemVariants}
                 whileHover={{ y: -5 }}
-                className="group relative bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-[#C4A962]/10 hover:border-[#C4A962]/30 transition-all duration-500"
+                className="group relative bg-white/5 backdrop-blur-sm rounded-2xl p-6 border border-[#C4A962]/10 hover:border-amber-800/30 transition-all duration-500"
               >
                 {/* Hover Background Effect */}
-                <div className="absolute inset-0 bg-gradient-to-r from-[#8B6B4D]/0 via-[#8B6B4D]/5 to-[#5D8A7A]/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                <div className="absolute inset-0 bg-gradient-to-r from-[#8B6B4D]/0 via-amber-800/5 to-amber-900/0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 
                 {/* Brand Icon */}
-                <div className="absolute -top-3 -right-3 w-10 h-10 rounded-full bg-[#C4A962]/10 flex items-center justify-center border border-[#C4A962]/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                  <Icon className="w-4 h-4 text-[#C4A962]" />
+                <div className="absolute -top-3 -right-3 w-10 h-10 rounded-full bg-amber-800/10 flex items-center justify-center border border-amber-800/30 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                  <Icon className="w-4 h-4 text-amber-800" />
                 </div>
 
                 {/* Brand Content */}
@@ -165,7 +165,7 @@ const BrandsSection = () => {
                   </div>
                   
                   {/* Brand Name */}
-                  <h3 className="text-white font-bold text-center mb-2 group-hover:text-[#C4A962] transition-colors">
+                  <h3 className="text-white font-bold text-center mb-2 group-hover:text-amber-800 transition-colors">
                     {brand.name}
                   </h3>
                   
@@ -174,7 +174,7 @@ const BrandsSection = () => {
                     <p className="text-gray-400 text-xs">
                       {brand.specialty}
                     </p>
-                    <p className="text-[#C4A962]/60 text-xs">
+                    <p className="text-amber-800/60 text-xs">
                       Est. {brand.founded}
                     </p>
                   </div>
@@ -184,7 +184,7 @@ const BrandsSection = () => {
                 </div>
 
                 {/* Bottom Glow Effect */}
-                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-[#8B6B4D] via-[#C4A962] to-[#5D8A7A] group-hover:w-3/4 transition-all duration-500"></div>
+                <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-gradient-to-r from-[#8B6B4D] via-[#C4A962] to-amber-800 group-hover:w-3/4 transition-all duration-500"></div>
               </motion.div>
             )
           })}
