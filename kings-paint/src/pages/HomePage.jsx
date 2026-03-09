@@ -7,7 +7,7 @@ import PromotionBanner from '@components/home/PromotionBanner'
 import TestimonialsSection from '@components/home/TestimonialsSection'
 import BrandsSection from '@components/home/BrandsSection'
 import NewsletterSection from '@components/home/NewsletterSection'
-import Partnersmarquee from '@components/home/Partnersmarquee'
+import PartnersMarquee from '@components/home/PartnersMarquee'
 
 const HomePage = () => {
   return (
@@ -20,7 +20,7 @@ const HomePage = () => {
       <TestimonialsSection />
       <BrandsSection />
       <NewsletterSection />
-      <Partnersmarquee />
+      <PartnersMarquee />
     </div>
   )
 }
