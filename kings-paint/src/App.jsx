@@ -1,12 +1,13 @@
-// src/App.jsx - UPDATED VERSION
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+// src/App.jsx
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom'
+import { useEffect } from 'react'
 import { Toaster } from 'react-hot-toast'
 import MainLayout from '@layouts/MainLayout'
 import HomePage from '@pages/HomePage'
 import AboutPage from '@pages/AboutPage'
 import ProductsPage from '@pages/ProductsPage'
 import ProductDetailPage from '@pages/ProductDetailPage'
-import CategoryPage from '@pages/CategoryPage' // Import the category page
+import CategoryPage from '@pages/CategoryPage'
 import RegistrationPage from '@pages/RegistrationPage'
 import CheckoutPage from '@pages/CheckoutPage'
 import CartPage from '@pages/CartPage'
@@ -14,10 +15,20 @@ import LoyaltyPage from '@pages/LoyaltyPage'
 import OrderConfirmationPage from '@pages/OrderConfirmationPage'
 import NotFoundPage from '@pages/NotFoundPage'
 
+// Scrolls to top on every route change
+const ScrollToTop = () => {
+  const { pathname } = useLocation()
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' })
+  }, [pathname])
+  return null
+}
+
 function App() {
   return (
     <Router>
-      <Toaster 
+      <ScrollToTop />
+      <Toaster
         position="top-right"
         toastOptions={{
           duration: 4000,
@@ -37,29 +48,20 @@ function App() {
       />
       <Routes>
         <Route path="/" element={<MainLayout />}>
-          {/* Main routes */}
           <Route index element={<HomePage />} />
           <Route path="about" element={<AboutPage />} />
-          
-          {/* Product routes */}
-          <Route path="products" element={<ProductsPage />} />
-          <Route path="products/:id" element={<ProductDetailPage />} />
-          
-          {/* ✅ FIXED: Single dynamic route for all categories */}
+
+          {/* ✅ Static segment first — must come before :id or it gets swallowed */}
           <Route path="products/category/:category" element={<CategoryPage />} />
-          
-          {/* Registration */}
+          <Route path="products/:id" element={<ProductDetailPage />} />
+          <Route path="products" element={<ProductsPage />} />
+
           <Route path="register" element={<RegistrationPage />} />
-          
-          {/* Cart & Checkout */}
           <Route path="cart" element={<CartPage />} />
           <Route path="checkout" element={<CheckoutPage />} />
           <Route path="order-confirmation" element={<OrderConfirmationPage />} />
-          
-          {/* Loyalty Program */}
           <Route path="loyalty" element={<LoyaltyPage />} />
-          
-          {/* 404 for any unmatched routes */}
+
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>

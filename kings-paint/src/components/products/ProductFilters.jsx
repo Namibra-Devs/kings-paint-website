@@ -1,16 +1,17 @@
 // src/components/products/ProductFilters.jsx
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
-  ChevronDownIcon,
-  XMarkIcon,
-  FunnelIcon
-} from '@heroicons/react/24/outline'
+  ChevronDown,
+  X,
+  SlidersHorizontal,
+  Star
+} from 'lucide-react'
 
 const ProductFilters = ({ onFilterChange }) => {
   const [filters, setFilters] = useState({
     categories: [],
-    priceRange: [0, 200],
+    priceRange: [0, 2000], // Updated to GH₵ range
     brands: [],
     finishes: [],
     colors: [],
@@ -28,7 +29,7 @@ const ProductFilters = ({ onFilterChange }) => {
     other: true
   })
 
-  // Categories data
+  // Categories data - Updated to match your actual categories
   const categories = [
     { id: 'interior', name: 'Interior Paints', count: 45 },
     { id: 'exterior', name: 'Exterior Paints', count: 32 },
@@ -37,14 +38,14 @@ const ProductFilters = ({ onFilterChange }) => {
     { id: 'tools', name: 'Tools & Supplies', count: 38 }
   ]
 
-  // Brands data
+  // Brands data - Updated with real brand names
   const brands = [
-    { id: 'colormaster', name: 'ColorMaster', count: 28 },
-    { id: 'duracoat', name: 'DuraCoat', count: 22 },
-    { id: 'luxepaint', name: 'LuxePaint', count: 18 },
-    { id: 'greencoat', name: 'GreenCoat', count: 15 },
-    { id: 'protools', name: 'ProTools', count: 25 },
-    { id: 'woodcraft', name: 'WoodCraft', count: 12 }
+    { id: 'benjamin moore®', name: 'Benjamin Moore®', count: 28 },
+    { id: 'sherwin williams', name: 'SHERWIN WILLIAMS', count: 32 },
+    { id: 'dulux', name: 'Dulux', count: 24 },
+    { id: 'ppg', name: 'PPG', count: 18 },
+    { id: 'behr', name: 'BEHR', count: 22 },
+    { id: 'valspar', name: 'Valspar', count: 16 }
   ]
 
   // Finishes data
@@ -53,10 +54,11 @@ const ProductFilters = ({ onFilterChange }) => {
     { id: 'eggshell', name: 'Eggshell', count: 28 },
     { id: 'satin', name: 'Satin', count: 32 },
     { id: 'gloss', name: 'Gloss', count: 25 },
-    { id: 'semi-gloss', name: 'Semi-Gloss', count: 20 }
+    { id: 'semi-gloss', name: 'Semi-Gloss', count: 20 },
+    { id: 'flat', name: 'Flat', count: 18 }
   ]
 
-  // Colors data
+  // Colors data - with KINGS PAINT brand colors
   const colors = [
     { id: 'white', name: 'White', code: '#FFFFFF', count: 40 },
     { id: 'off-white', name: 'Off White', code: '#F5F5F5', count: 35 },
@@ -64,7 +66,10 @@ const ProductFilters = ({ onFilterChange }) => {
     { id: 'gray', name: 'Gray', code: '#808080', count: 32 },
     { id: 'blue', name: 'Blue', code: '#0000FF', count: 25 },
     { id: 'green', name: 'Green', code: '#008000', count: 22 },
-    { id: 'brown', name: 'Brown', code: '#8B4513', count: 18 }
+    { id: 'brown', name: 'Brown', code: '#8B4513', count: 18 },
+    { id: 'black', name: 'Black', code: '#000000', count: 15 },
+    { id: 'gold', name: 'Gold', code: '#C4A962', count: 12 }, // KINGS PAINT gold
+    { id: 'bronze', name: 'Bronze', code: '#8B6B4D', count: 10 } // KINGS PAINT bronze
   ]
 
   const toggleSection = (section) => {
@@ -162,7 +167,7 @@ const ProductFilters = ({ onFilterChange }) => {
   const clearAllFilters = () => {
     const clearedFilters = {
       categories: [],
-      priceRange: [0, 200],
+      priceRange: [0, 2000],
       brands: [],
       finishes: [],
       colors: [],
@@ -187,14 +192,14 @@ const ProductFilters = ({ onFilterChange }) => {
     <div className="w-full">
       {/* Header */}
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-lg font-semibold flex items-center">
-          <FunnelIcon className="h-5 w-5 mr-2" />
+        <h2 className="text-lg font-semibold flex items-center text-gray-900">
+          <SlidersHorizontal className="h-5 w-5 mr-2 text-[#8B6B4D]" />
           Filters
         </h2>
         {activeFilterCount > 0 && (
           <button
             onClick={clearAllFilters}
-            className="text-sm text-primary-600 hover:text-primary-700 font-medium"
+            className="text-sm text-[#8B6B4D] hover:text-[#C4A962] font-medium transition-colors"
           >
             Clear All ({activeFilterCount})
           </button>
@@ -207,13 +212,13 @@ const ProductFilters = ({ onFilterChange }) => {
           {filters.categories.map(catId => {
             const category = categories.find(c => c.id === catId)
             return category && (
-              <span key={catId} className="inline-flex items-center bg-primary-100 text-primary-800 text-xs px-2 py-1 rounded">
+              <span key={catId} className="inline-flex items-center bg-[#8B6B4D]/10 text-[#8B6B4D] text-xs px-2 py-1 rounded-full border border-[#C4A962]/20">
                 {category.name}
                 <button
                   onClick={() => handleCategoryChange(catId)}
-                  className="ml-1 hover:text-primary-900"
+                  className="ml-1 hover:text-[#C4A962]"
                 >
-                  <XMarkIcon className="h-3 w-3" />
+                  <X className="h-3 w-3" />
                 </button>
               </span>
             )
@@ -222,13 +227,13 @@ const ProductFilters = ({ onFilterChange }) => {
           {filters.brands.map(brandId => {
             const brand = brands.find(b => b.id === brandId)
             return brand && (
-              <span key={brandId} className="inline-flex items-center bg-primary-100 text-primary-800 text-xs px-2 py-1 rounded">
+              <span key={brandId} className="inline-flex items-center bg-[#8B6B4D]/10 text-[#8B6B4D] text-xs px-2 py-1 rounded-full border border-[#C4A962]/20">
                 {brand.name}
                 <button
                   onClick={() => handleBrandChange(brandId)}
-                  className="ml-1 hover:text-primary-900"
+                  className="ml-1 hover:text-[#C4A962]"
                 >
-                  <XMarkIcon className="h-3 w-3" />
+                  <X className="h-3 w-3" />
                 </button>
               </span>
             )
@@ -237,13 +242,13 @@ const ProductFilters = ({ onFilterChange }) => {
           {filters.finishes.map(finishId => {
             const finish = finishes.find(f => f.id === finishId)
             return finish && (
-              <span key={finishId} className="inline-flex items-center bg-primary-100 text-primary-800 text-xs px-2 py-1 rounded">
+              <span key={finishId} className="inline-flex items-center bg-[#8B6B4D]/10 text-[#8B6B4D] text-xs px-2 py-1 rounded-full border border-[#C4A962]/20">
                 {finish.name}
                 <button
                   onClick={() => handleFinishChange(finishId)}
-                  className="ml-1 hover:text-primary-900"
+                  className="ml-1 hover:text-[#C4A962]"
                 >
-                  <XMarkIcon className="h-3 w-3" />
+                  <X className="h-3 w-3" />
                 </button>
               </span>
             )
@@ -252,50 +257,54 @@ const ProductFilters = ({ onFilterChange }) => {
           {filters.colors.map(colorId => {
             const color = colors.find(c => c.id === colorId)
             return color && (
-              <span key={colorId} className="inline-flex items-center bg-primary-100 text-primary-800 text-xs px-2 py-1 rounded">
+              <span key={colorId} className="inline-flex items-center bg-[#8B6B4D]/10 text-[#8B6B4D] text-xs px-2 py-1 rounded-full border border-[#C4A962]/20">
+                <span
+                  className="w-3 h-3 rounded-full mr-1"
+                  style={{ backgroundColor: color.code }}
+                ></span>
                 {color.name}
                 <button
                   onClick={() => handleColorChange(colorId)}
-                  className="ml-1 hover:text-primary-900"
+                  className="ml-1 hover:text-[#C4A962]"
                 >
-                  <XMarkIcon className="h-3 w-3" />
+                  <X className="h-3 w-3" />
                 </button>
               </span>
             )
           })}
           
           {filters.inStock && (
-            <span className="inline-flex items-center bg-primary-100 text-primary-800 text-xs px-2 py-1 rounded">
+            <span className="inline-flex items-center bg-[#8B6B4D]/10 text-[#8B6B4D] text-xs px-2 py-1 rounded-full border border-[#C4A962]/20">
               In Stock
               <button
                 onClick={() => handleStockChange({ target: { checked: false } })}
-                className="ml-1 hover:text-primary-900"
+                className="ml-1 hover:text-[#C4A962]"
               >
-                <XMarkIcon className="h-3 w-3" />
+                <X className="h-3 w-3" />
               </button>
             </span>
           )}
           
           {filters.onSale && (
-            <span className="inline-flex items-center bg-primary-100 text-primary-800 text-xs px-2 py-1 rounded">
+            <span className="inline-flex items-center bg-[#8B6B4D]/10 text-[#8B6B4D] text-xs px-2 py-1 rounded-full border border-[#C4A962]/20">
               On Sale
               <button
                 onClick={() => handleSaleChange({ target: { checked: false } })}
-                className="ml-1 hover:text-primary-900"
+                className="ml-1 hover:text-[#C4A962]"
               >
-                <XMarkIcon className="h-3 w-3" />
+                <X className="h-3 w-3" />
               </button>
             </span>
           )}
           
           {filters.rating > 0 && (
-            <span className="inline-flex items-center bg-primary-100 text-primary-800 text-xs px-2 py-1 rounded">
+            <span className="inline-flex items-center bg-[#8B6B4D]/10 text-[#8B6B4D] text-xs px-2 py-1 rounded-full border border-[#C4A962]/20">
               {filters.rating}+ Stars
               <button
                 onClick={() => handleRatingChange(0)}
-                className="ml-1 hover:text-primary-900"
+                className="ml-1 hover:text-[#C4A962]"
               >
-                <XMarkIcon className="h-3 w-3" />
+                <X className="h-3 w-3" />
               </button>
             </span>
           )}
@@ -306,11 +315,11 @@ const ProductFilters = ({ onFilterChange }) => {
       <div className="border-b border-gray-200 py-4">
         <button
           onClick={() => toggleSection('categories')}
-          className="flex items-center justify-between w-full text-left font-medium"
+          className="flex items-center justify-between w-full text-left font-medium text-gray-700 hover:text-[#8B6B4D] transition-colors"
         >
           <span>Categories</span>
-          <ChevronDownIcon
-            className={`h-5 w-5 transition-transform ${
+          <ChevronDown
+            className={`h-5 w-5 transition-transform duration-300 ${
               expandedSections.categories ? 'rotate-180' : ''
             }`}
           />
@@ -333,9 +342,9 @@ const ProductFilters = ({ onFilterChange }) => {
                         type="checkbox"
                         checked={filters.categories.includes(category.id)}
                         onChange={() => handleCategoryChange(category.id)}
-                        className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                        className="rounded border-gray-300 text-[#8B6B4D] focus:ring-[#C4A962] focus:ring-2"
                       />
-                      <span className="ml-2 text-sm text-gray-700 group-hover:text-primary-600">
+                      <span className="ml-2 text-sm text-gray-600 group-hover:text-[#8B6B4D] transition-colors">
                         {category.name}
                       </span>
                     </div>
@@ -352,11 +361,11 @@ const ProductFilters = ({ onFilterChange }) => {
       <div className="border-b border-gray-200 py-4">
         <button
           onClick={() => toggleSection('price')}
-          className="flex items-center justify-between w-full text-left font-medium"
+          className="flex items-center justify-between w-full text-left font-medium text-gray-700 hover:text-[#8B6B4D] transition-colors"
         >
-          <span>Price Range</span>
-          <ChevronDownIcon
-            className={`h-5 w-5 transition-transform ${
+          <span>Price Range (GH₵)</span>
+          <ChevronDown
+            className={`h-5 w-5 transition-transform duration-300 ${
               expandedSections.price ? 'rotate-180' : ''
             }`}
           />
@@ -373,8 +382,8 @@ const ProductFilters = ({ onFilterChange }) => {
             >
               <div className="pt-4 space-y-4">
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">
-                    ${filters.priceRange[0]} - ${filters.priceRange[1]}
+                  <span className="text-sm font-medium text-[#8B6B4D]">
+                    GH₵{filters.priceRange[0]} - GH₵{filters.priceRange[1]}
                   </span>
                 </div>
                 
@@ -382,33 +391,33 @@ const ProductFilters = ({ onFilterChange }) => {
                   <input
                     type="range"
                     min="0"
-                    max="200"
+                    max="2000"
                     value={filters.priceRange[1]}
                     onChange={handlePriceChange}
-                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-primary-600"
+                    className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer accent-[#8B6B4D]"
                   />
                   
                   <div className="flex gap-2">
                     <div className="flex-1">
-                      <label className="block text-xs text-gray-500 mb-1">Min</label>
+                      <label className="block text-xs text-gray-500 mb-1">Min (GH₵)</label>
                       <input
                         type="number"
                         min="0"
                         max={filters.priceRange[1]}
                         value={filters.priceRange[0]}
                         onChange={handleMinPriceChange}
-                        className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary-500"
+                        className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-[#8B6B4D] focus:border-[#8B6B4D]"
                       />
                     </div>
                     <div className="flex-1">
-                      <label className="block text-xs text-gray-500 mb-1">Max</label>
+                      <label className="block text-xs text-gray-500 mb-1">Max (GH₵)</label>
                       <input
                         type="number"
                         min={filters.priceRange[0]}
-                        max="200"
+                        max="2000"
                         value={filters.priceRange[1]}
                         onChange={handleMaxPriceChange}
-                        className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-primary-500"
+                        className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:outline-none focus:ring-1 focus:ring-[#8B6B4D] focus:border-[#8B6B4D]"
                       />
                     </div>
                   </div>
@@ -423,11 +432,11 @@ const ProductFilters = ({ onFilterChange }) => {
       <div className="border-b border-gray-200 py-4">
         <button
           onClick={() => toggleSection('brands')}
-          className="flex items-center justify-between w-full text-left font-medium"
+          className="flex items-center justify-between w-full text-left font-medium text-gray-700 hover:text-[#8B6B4D] transition-colors"
         >
           <span>Brands</span>
-          <ChevronDownIcon
-            className={`h-5 w-5 transition-transform ${
+          <ChevronDown
+            className={`h-5 w-5 transition-transform duration-300 ${
               expandedSections.brands ? 'rotate-180' : ''
             }`}
           />
@@ -450,9 +459,9 @@ const ProductFilters = ({ onFilterChange }) => {
                         type="checkbox"
                         checked={filters.brands.includes(brand.id)}
                         onChange={() => handleBrandChange(brand.id)}
-                        className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                        className="rounded border-gray-300 text-[#8B6B4D] focus:ring-[#C4A962] focus:ring-2"
                       />
-                      <span className="ml-2 text-sm text-gray-700 group-hover:text-primary-600">
+                      <span className="ml-2 text-sm text-gray-600 group-hover:text-[#8B6B4D] transition-colors">
                         {brand.name}
                       </span>
                     </div>
@@ -469,11 +478,11 @@ const ProductFilters = ({ onFilterChange }) => {
       <div className="border-b border-gray-200 py-4">
         <button
           onClick={() => toggleSection('finishes')}
-          className="flex items-center justify-between w-full text-left font-medium"
+          className="flex items-center justify-between w-full text-left font-medium text-gray-700 hover:text-[#8B6B4D] transition-colors"
         >
           <span>Finish</span>
-          <ChevronDownIcon
-            className={`h-5 w-5 transition-transform ${
+          <ChevronDown
+            className={`h-5 w-5 transition-transform duration-300 ${
               expandedSections.finishes ? 'rotate-180' : ''
             }`}
           />
@@ -496,9 +505,9 @@ const ProductFilters = ({ onFilterChange }) => {
                         type="checkbox"
                         checked={filters.finishes.includes(finish.id)}
                         onChange={() => handleFinishChange(finish.id)}
-                        className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                        className="rounded border-gray-300 text-[#8B6B4D] focus:ring-[#C4A962] focus:ring-2"
                       />
-                      <span className="ml-2 text-sm text-gray-700 group-hover:text-primary-600">
+                      <span className="ml-2 text-sm text-gray-600 group-hover:text-[#8B6B4D] transition-colors">
                         {finish.name}
                       </span>
                     </div>
@@ -515,11 +524,11 @@ const ProductFilters = ({ onFilterChange }) => {
       <div className="border-b border-gray-200 py-4">
         <button
           onClick={() => toggleSection('colors')}
-          className="flex items-center justify-between w-full text-left font-medium"
+          className="flex items-center justify-between w-full text-left font-medium text-gray-700 hover:text-[#8B6B4D] transition-colors"
         >
           <span>Colors</span>
-          <ChevronDownIcon
-            className={`h-5 w-5 transition-transform ${
+          <ChevronDown
+            className={`h-5 w-5 transition-transform duration-300 ${
               expandedSections.colors ? 'rotate-180' : ''
             }`}
           />
@@ -542,13 +551,13 @@ const ProductFilters = ({ onFilterChange }) => {
                         type="checkbox"
                         checked={filters.colors.includes(color.id)}
                         onChange={() => handleColorChange(color.id)}
-                        className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                        className="rounded border-gray-300 text-[#8B6B4D] focus:ring-[#C4A962] focus:ring-2"
                       />
                       <span
-                        className="w-4 h-4 rounded-full ml-2"
+                        className="w-4 h-4 rounded-full ml-2 border border-gray-200"
                         style={{ backgroundColor: color.code }}
                       ></span>
-                      <span className="ml-2 text-sm text-gray-700 group-hover:text-primary-600">
+                      <span className="ml-2 text-sm text-gray-600 group-hover:text-[#8B6B4D] transition-colors">
                         {color.name}
                       </span>
                     </div>
@@ -565,11 +574,11 @@ const ProductFilters = ({ onFilterChange }) => {
       <div className="border-b border-gray-200 py-4">
         <button
           onClick={() => toggleSection('other')}
-          className="flex items-center justify-between w-full text-left font-medium"
+          className="flex items-center justify-between w-full text-left font-medium text-gray-700 hover:text-[#8B6B4D] transition-colors"
         >
           <span>Other Filters</span>
-          <ChevronDownIcon
-            className={`h-5 w-5 transition-transform ${
+          <ChevronDown
+            className={`h-5 w-5 transition-transform duration-300 ${
               expandedSections.other ? 'rotate-180' : ''
             }`}
           />
@@ -590,7 +599,7 @@ const ProductFilters = ({ onFilterChange }) => {
                     type="checkbox"
                     checked={filters.inStock}
                     onChange={handleStockChange}
-                    className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                    className="rounded border-gray-300 text-[#8B6B4D] focus:ring-[#C4A962] focus:ring-2"
                   />
                   <span className="ml-2 text-sm text-gray-700">In Stock Only</span>
                 </label>
@@ -600,7 +609,7 @@ const ProductFilters = ({ onFilterChange }) => {
                     type="checkbox"
                     checked={filters.onSale}
                     onChange={handleSaleChange}
-                    className="rounded border-gray-300 text-primary-600 focus:ring-primary-500"
+                    className="rounded border-gray-300 text-[#8B6B4D] focus:ring-[#C4A962] focus:ring-2"
                   />
                   <span className="ml-2 text-sm text-gray-700">On Sale</span>
                 </label>
@@ -612,13 +621,13 @@ const ProductFilters = ({ onFilterChange }) => {
                       <button
                         key={rating}
                         onClick={() => handleRatingChange(rating)}
-                        className={`px-3 py-1 text-sm border rounded transition-colors ${
+                        className={`px-3 py-1 text-sm border rounded transition-colors flex items-center gap-1 ${
                           filters.rating === rating
-                            ? 'bg-primary-600 text-white border-primary-600'
-                            : 'border-gray-300 hover:border-gray-400'
+                            ? 'bg-[#8B6B4D] text-white border-[#8B6B4D]'
+                            : 'border-gray-300 text-gray-600 hover:border-[#8B6B4D] hover:text-[#8B6B4D]'
                         }`}
                       >
-                        {rating}+ ★
+                        {rating} <Star className="w-3 h-3 fill-current" />
                       </button>
                     ))}
                   </div>
@@ -631,7 +640,7 @@ const ProductFilters = ({ onFilterChange }) => {
 
       {/* Apply Filters Button (Mobile) */}
       <div className="mt-6 lg:hidden">
-        <button className="w-full bg-primary-600 text-white py-2 rounded-lg font-medium hover:bg-primary-700">
+        <button className="w-full bg-[#8B6B4D] text-white py-2 rounded-lg font-medium hover:bg-[#9B7E5E] transition-colors">
           Apply Filters
         </button>
       </div>

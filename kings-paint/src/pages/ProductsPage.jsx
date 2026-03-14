@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
 import { 
-  FunnelIcon, 
-  XMarkIcon,
-  ChevronDownIcon,
-  MagnifyingGlassIcon 
-} from '@heroicons/react/24/outline'
+  SlidersHorizontal,
+  X,
+  ChevronDown,
+  Search
+} from 'lucide-react' // 👈 Changed to Lucide React
 import ProductCard from '@components/ProductCard'
 import ProductFilters from '@components/products/ProductFilters'
 
@@ -19,7 +19,7 @@ const ProductsPage = () => {
   const [loading, setLoading] = useState(true)
   const [sortBy, setSortBy] = useState('featured')
 
-  // Diverse mock product images
+  // Diverse mock product images - ✅ These are correct
   const productImages = [
     "/images/interior.png",
     "/images/exterior.png",
@@ -143,10 +143,10 @@ const ProductsPage = () => {
       id: i + 1,
       name: productNames[i % productNames.length],
       brand: brands[Math.floor(Math.random() * brands.length)],
-      price: Math.floor(Math.random() * 500) + 50, // GH₵50 - GH₵550
+      price: Math.floor(Math.random() * 500) + 50,
       oldPrice: Math.random() > 0.7 ? Math.floor(Math.random() * 600) + 100 : null,
-      image: productImages[i % productImages.length],
-      rating: (Math.random() * 1.5) + 3.5, // 3.5 - 5.0
+      image: productImages[i % productImages.length], // ✅ Your images are used here
+      rating: (Math.random() * 1.5) + 3.5,
       reviews: Math.floor(Math.random() * 200) + 20,
       category: categories[Math.floor(Math.random() * categories.length)],
       finish: finishes[Math.floor(Math.random() * finishes.length)],
@@ -154,7 +154,7 @@ const ProductsPage = () => {
       inStock: Math.random() > 0.2,
       onSale: Math.random() > 0.7,
       points: Math.floor(Math.random() * 100) + 20,
-      description: `Premium quality ${categories[Math.floor(Math.random() * categories.length)].toLowerCase()} paint with ${finishes[Math.floor(Math.random() * finishes.length)].toLowerCase()} finish. Perfect for your next project.`,
+      description: `Premium quality ${categories[Math.floor(Math.random() * categories.length)].toLowerCase()} paint with ${finishes[Math.floor(Math.random() * finishes.length)].toLowerCase()} finish.`,
       volume: ['1L', '2.5L', '3.5L', '5L', '10L', '20L'][Math.floor(Math.random() * 6)]
     }))
 
@@ -182,7 +182,6 @@ const ProductsPage = () => {
         sorted.sort((a, b) => b.id - a.id)
         break
       default:
-        // featured - keep original order
         sorted = [...products]
     }
     
@@ -192,41 +191,13 @@ const ProductsPage = () => {
   // Handle filter changes
   const handleFilterChange = (filters) => {
     let filtered = products.filter(product => {
-      // Category filter
-      if (filters.categories.length > 0 && !filters.categories.includes(product.category)) {
-        return false
-      }
-      
-      // Price range filter
-      if (product.price < filters.priceRange[0] || product.price > filters.priceRange[1]) {
-        return false
-      }
-      
-      // Brand filter
-      if (filters.brands.length > 0 && !filters.brands.includes(product.brand)) {
-        return false
-      }
-      
-      // Finish filter
-      if (filters.finishes.length > 0 && !filters.finishes.includes(product.finish)) {
-        return false
-      }
-      
-      // Color filter
-      if (filters.colors.length > 0 && !filters.colors.includes(product.color)) {
-        return false
-      }
-      
-      // In stock filter
-      if (filters.inStock && !product.inStock) {
-        return false
-      }
-      
-      // On sale filter
-      if (filters.onSale && !product.onSale) {
-        return false
-      }
-      
+      if (filters.categories.length > 0 && !filters.categories.includes(product.category)) return false
+      if (product.price < filters.priceRange[0] || product.price > filters.priceRange[1]) return false
+      if (filters.brands.length > 0 && !filters.brands.includes(product.brand)) return false
+      if (filters.finishes.length > 0 && !filters.finishes.includes(product.finish)) return false
+      if (filters.colors.length > 0 && !filters.colors.includes(product.color)) return false
+      if (filters.inStock && !product.inStock) return false
+      if (filters.onSale && !product.onSale) return false
       return true
     })
     
@@ -255,9 +226,9 @@ const ProductsPage = () => {
               onClick={() => setShowFilters(!showFilters)}
               className="lg:hidden flex items-center gap-2 px-4 py-2 bg-white rounded-lg shadow-sm hover:bg-gray-50"
             >
-              <FunnelIcon className="h-5 w-5" />
-              Filters
-              <ChevronDownIcon className={`h-4 w-4 transition-transform ${showFilters ? 'rotate-180' : ''}`} />
+              <SlidersHorizontal className="h-5 w-5 text-[#8B6B4D]" />
+              <span>Filters</span>
+              <ChevronDown className={`h-4 w-4 transition-transform ${showFilters ? 'rotate-180' : ''}`} />
             </button>
             
             <div className="flex items-center gap-4">
@@ -268,7 +239,7 @@ const ProductsPage = () => {
               <select
                 value={sortBy}
                 onChange={(e) => handleSort(e.target.value)}
-                className="px-3 py-2 bg-white border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
+                className="px-3 py-2 bg-white border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[#8B6B4D] focus:border-transparent"
               >
                 <option value="featured">Featured</option>
                 <option value="price-low">Price: Low to High</option>
@@ -294,9 +265,9 @@ const ProductsPage = () => {
                   {showFilters && (
                     <button
                       onClick={() => setShowFilters(false)}
-                      className="lg:hidden absolute top-4 right-4 p-2"
+                      className="lg:hidden absolute top-4 right-4 p-2 hover:bg-gray-100 rounded-full transition-colors"
                     >
-                      <XMarkIcon className="h-6 w-6" />
+                      <X className="h-6 w-6 text-gray-600" />
                     </button>
                   )}
                   
@@ -328,7 +299,7 @@ const ProductsPage = () => {
                           setFilteredProducts(products)
                           handleSort('featured')
                         }}
-                        className="text-amber-600 hover:text-amber-700 font-semibold"
+                        className="text-[#8B6B4D] hover:text-[#C4A962] font-semibold transition-colors"
                       >
                         Clear all filters
                       </button>
