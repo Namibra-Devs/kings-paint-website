@@ -12,8 +12,11 @@ import {
 } from "@heroicons/react/24/outline";
 import useCartStore from "@store/cartStore";
 import useAuthStore from "@store/authStore";
+import useWishlistStore from '@store/wishlistStore'
 
 const DesktopNav = () => {
+ const wishlistCount = useWishlistStore((state) => state.items.length)
+
   const navigate = useNavigate();
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPlaceholder, setCurrentPlaceholder] = useState(0);
@@ -21,6 +24,7 @@ const DesktopNav = () => {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
   const { items } = useCartStore();
   const { user, isAuthenticated } = useAuthStore();
+
 
   // Rotating search placeholders
   const searchPlaceholders = [
@@ -164,7 +168,7 @@ const DesktopNav = () => {
                 <img
                   src="KingsLogo.png"
                   alt="PaintPro Logo"
-                  className="w-full h-full object-fill"
+                  className="w-full h-full object-contain"
                 />
               </motion.div>
 
@@ -216,21 +220,20 @@ const DesktopNav = () => {
 
             {/* Premium Icons */}
             <div className="flex items-center space-x-6">
-              <motion.div
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                <Link to="/wishlist" className="relative group hover:bg-amber-100">
-                  <HeartIcon className="h-6 w-6 text-gray-600 group-hover:text-amber-600   transition-colors" />
-                  <motion.span
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="absolute -top-2 -right-2 bg-gradient-to-r from-red-500 to-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center shadow-lg"
-                  >
-                    0
-                  </motion.span>
-                </Link>
-              </motion.div>
+              <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+  <Link to="/wishlist" className="relative group hover:bg-amber-100">
+    <HeartIcon className="h-6 w-6 text-gray-600 group-hover:text-amber-600 transition-colors" />
+    {wishlistCount > 0 && (
+      <motion.span
+        initial={{ scale: 0 }}
+        animate={{ scale: 1 }}
+        className="absolute -top-2 -right-2 bg-gradient-to-r from-red-500 to-red-600 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center shadow-lg"
+      >
+        {wishlistCount}
+      </motion.span>
+    )}
+  </Link>
+</motion.div>
 
               <motion.div
                 whileHover={{ scale: 1.1 }}

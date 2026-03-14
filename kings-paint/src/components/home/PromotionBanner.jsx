@@ -143,21 +143,7 @@ const PromotionBanner = () => {
             </motion.div>
           </AnimatePresence>
 
-          {/* Slide Indicators */}
-          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2">
-            {banners.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => setCurrentSlide(index)}
-                className={`transition-all duration-300 ${
-                  currentSlide === index
-                    ? "w-8 h-2 bg-white rounded-full"
-                    : "w-2 h-2 bg-white/50 rounded-full hover:bg-white/80 hover:scale-125"
-                }`}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
-          </div>
+         
         </div>
 
         {/* Decorative blurs */}

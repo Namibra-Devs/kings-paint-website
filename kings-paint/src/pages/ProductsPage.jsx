@@ -19,23 +19,143 @@ const ProductsPage = () => {
   const [loading, setLoading] = useState(true)
   const [sortBy, setSortBy] = useState('featured')
 
-  // Mock products data
+  // Diverse mock product images
+  const productImages = [
+    "/images/interior.png",
+    "/images/exterior.png",
+    "/images/metal.jpeg",
+    "/images/eco.png",
+    "/images/tools.png",
+    "/images/ceiling.png",
+    "/images/benjamin.webp",
+    "/images/chalk3.jpeg",
+    "/images/kitchen.avif",
+    "/images/paint8.png",
+    "/images/chalk.png",
+    "/images/mag.jpeg",
+    "/images/chalk.jpeg",
+    "/images/sand.jpg",
+    "/images/paint-service.avif",
+    "/images/con1.jpeg",
+    "/images/paint10.png",
+    "/images/gloss2.jpg",
+    "/images/egg.jpeg",
+    "/images/flat.jpeg",
+    "/images/door.jpeg",
+    "/images/door4.jpeg",
+    "/images/chalk2.jpeg",
+    "/images/spray.jpeg",
+  ]
+
+  // Product names for variety
+  const productNames = [
+    "Premium Interior Paint - Matte Finish",
+    "WeatherShield Exterior Paint - Satin",
+    "Metallic Finish - Gold Series",
+    "Eco-Friendly Primer - Zero VOC",
+    "Professional Paint Roller Set",
+    "Ceiling Paint - Bright White",
+    "Wood Stain - Natural Oak",
+    "Anti-Mold Bathroom Paint",
+    "Kitchen & Bathroom Satin Finish",
+    "Floor & Patio Epoxy Coating",
+    "Chalk Paint - Vintage Collection",
+    "Magnetic Paint - Interactive Wall",
+    "Chalkboard Paint - Black",
+    "Textured Wall Finish - Sandstone",
+    "Metal Protection - Rust Proof",
+    "Concrete Sealer - Industrial Grade",
+    "Wallpaper Primer - Smooth Base",
+    "High Gloss Enamel - Premium",
+    "Eggshell Finish - Soft Sheen",
+    "Flat Finish - No Shine",
+    "Semi-Gloss Trim Paint",
+    "Door & Window Paint - Durable",
+    "Furniture Refresh - Chalk Style",
+    "Spray Paint - Quick Dry"
+  ]
+
+  // Brands for variety
+  const brands = [
+    "Benjamin Moore®",
+    "SHERWIN WILLIAMS", 
+    "Dulux",
+    "PPG",
+    "BEHR",
+    "Valspar",
+    "ColorMaster",
+    "DuraCoat",
+    "LuxePaint",
+    "GreenCoat",
+    "ProTools",
+    "WoodCraft"
+  ]
+
+  // Categories for variety
+  const categories = [
+    'Interior', 
+    'Exterior', 
+    'Specialty', 
+    'Primers', 
+    'Tools',
+    'Wood',
+    'Metal',
+    'Concrete',
+    'Floor',
+    'Ceiling'
+  ]
+
+  // Finishes for variety
+  const finishes = [
+    'Matte', 
+    'Satin', 
+    'Gloss', 
+    'Eggshell', 
+    'Flat', 
+    'Semi-Gloss', 
+    'High-Gloss', 
+    'Textured', 
+    'Chalk'
+  ]
+
+  // Colors for variety
+  const colors = [
+    'White', 
+    'Blue', 
+    'Green', 
+    'Beige', 
+    'Gray', 
+    'Black', 
+    'Red', 
+    'Yellow', 
+    'Brown', 
+    'Purple',
+    'Orange',
+    'Pink',
+    'Gold',
+    'Silver',
+    'Bronze'
+  ]
+
+  // Mock products data with diverse images
   useEffect(() => {
     const mockProducts = Array.from({ length: 24 }, (_, i) => ({
       id: i + 1,
-      name: `Premium Paint ${i + 1}`,
-      brand: ['ColorMaster', 'DuraCoat', 'LuxePaint', 'GreenCoat'][Math.floor(Math.random() * 4)],
-      price: Math.floor(Math.random() * 100) + 20,
-      oldPrice: Math.random() > 0.7 ? Math.floor(Math.random() * 120) + 30 : null,
-      image: "/api/placeholder/300/300",
-      rating: (Math.random() * 2) + 3,
+      name: productNames[i % productNames.length],
+      brand: brands[Math.floor(Math.random() * brands.length)],
+      price: Math.floor(Math.random() * 500) + 50, // GH₵50 - GH₵550
+      oldPrice: Math.random() > 0.7 ? Math.floor(Math.random() * 600) + 100 : null,
+      image: productImages[i % productImages.length],
+      rating: (Math.random() * 1.5) + 3.5, // 3.5 - 5.0
       reviews: Math.floor(Math.random() * 200) + 20,
-      category: ['Interior', 'Exterior', 'Specialty', 'Primers', 'Tools'][Math.floor(Math.random() * 5)],
-      finish: ['Matte', 'Satin', 'Gloss', 'Eggshell'][Math.floor(Math.random() * 4)],
-      color: ['White', 'Blue', 'Green', 'Beige', 'Gray'][Math.floor(Math.random() * 5)],
+      category: categories[Math.floor(Math.random() * categories.length)],
+      finish: finishes[Math.floor(Math.random() * finishes.length)],
+      color: colors[Math.floor(Math.random() * colors.length)],
       inStock: Math.random() > 0.2,
       onSale: Math.random() > 0.7,
-      points: Math.floor(Math.random() * 100) + 20
+      points: Math.floor(Math.random() * 100) + 20,
+      description: `Premium quality ${categories[Math.floor(Math.random() * categories.length)].toLowerCase()} paint with ${finishes[Math.floor(Math.random() * finishes.length)].toLowerCase()} finish. Perfect for your next project.`,
+      volume: ['1L', '2.5L', '3.5L', '5L', '10L', '20L'][Math.floor(Math.random() * 6)]
     }))
 
     setProducts(mockProducts)
@@ -148,7 +268,7 @@ const ProductsPage = () => {
               <select
                 value={sortBy}
                 onChange={(e) => handleSort(e.target.value)}
-                className="px-3 py-2 bg-white border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="px-3 py-2 bg-white border rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-500"
               >
                 <option value="featured">Featured</option>
                 <option value="price-low">Price: Low to High</option>
@@ -208,7 +328,7 @@ const ProductsPage = () => {
                           setFilteredProducts(products)
                           handleSort('featured')
                         }}
-                        className="text-primary-600 hover:text-primary-700 font-semibold"
+                        className="text-amber-600 hover:text-amber-700 font-semibold"
                       >
                         Clear all filters
                       </button>
