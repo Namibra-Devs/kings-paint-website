@@ -20,6 +20,7 @@ import {
   HelpCircle
 } from 'lucide-react'
 import toast from 'react-hot-toast'
+import PartnersMarquee from '@components/home/PartnersMarquee'
 
 const ContactPage = () => {
   const [formData, setFormData] = useState({
@@ -125,7 +126,7 @@ const ContactPage = () => {
       <section className="relative h-[400px] overflow-hidden">
         <div className="absolute inset-0">
           <img 
-            src="/images/contact-hero.jpg" 
+            src="/images/footer.webp" 
             alt="Contact Kings Paint Depot"
             className="w-full h-full object-cover"
           />
@@ -140,16 +141,16 @@ const ContactPage = () => {
             className="max-w-3xl"
           >
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 bg-[#C4A962] rounded-lg flex items-center justify-center">
+              <div className="w-12 h-12 bg-amber-600 rounded-lg flex items-center justify-center">
                 <MessageCircle className="w-6 h-6 text-black" />
               </div>
-              <span className="text-[#C4A962] font-medium tracking-wider">GET IN TOUCH</span>
+              <span className="text-amber-600 font-medium tracking-wider">GET IN TOUCH</span>
             </div>
             <h1 className="text-5xl lg:text-6xl font-bold text-white mb-6">
-              Let's <span className="text-[#C4A962]">Connect</span>
+              Let's Connect
             </h1>
             <p className="text-xl text-gray-300 max-w-2xl">
-              Have questions about our products or need expert advice? 
+              Have questions about our products or need expert advice? <br />
               We're here to help with all your painting needs.
             </p>
           </motion.div>
@@ -157,7 +158,7 @@ const ContactPage = () => {
       </section>
 
       {/* Contact Info Cards */}
-      <section className="py-16 bg-white">
+      <section className="py-16 bg-[#171b17ff]">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 -mt-20 relative z-20">
             {contactInfo.map((item, index) => {
@@ -175,7 +176,7 @@ const ContactPage = () => {
                     href={item.link}
                     target={item.link?.startsWith('http') ? '_blank' : '_self'}
                     rel={item.link?.startsWith('http') ? 'noopener noreferrer' : ''}
-                    className="block bg-white rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-300 group"
+                    className="block bg-white rounded-sm shadow-sm hover:shadow-2xl transition-all duration-300 group"
                   >
                     <div className="p-6">
                       <div className={`w-14 h-14 rounded-xl bg-gradient-to-r ${item.color} bg-opacity-10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform`}>
@@ -203,7 +204,7 @@ const ContactPage = () => {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="bg-white rounded-3xl shadow-xl p-8 lg:p-10"
+              className="bg-white rounded-md shadow-md p-8 lg:p-10"
             >
               <div className="mb-8">
                 <h2 className="text-3xl font-bold text-gray-900 mb-2">Send us a Message</h2>
@@ -306,7 +307,7 @@ const ContactPage = () => {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className="w-full bg-gradient-to-r from-[#8B6B4D] to-[#5D8A7A] text-white px-6 py-4 rounded-xl font-semibold hover:from-[#9B7E5E] hover:to-[#6D9A8A] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-lg hover:shadow-xl"
+                  className="w-full bg-gradient-to-r from-[#171b17ff] to-[#5D8A7A] text-white px-6 py-4 rounded-md font-semibold hover:from-[#9B7E5E] hover:to-[#171b17ff] transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 shadow-sm hover:shadow-xl cursor-pointer"
                 >
                   {isSubmitting ? (
                     <>
@@ -332,7 +333,7 @@ const ContactPage = () => {
               className="space-y-6"
             >
               {/* Map Card */}
-              <div className="bg-white rounded-3xl shadow-xl overflow-hidden">
+              <div className="bg-white rounded-sm shadow-md overflow-hidden">
                 <div className="h-[300px] relative">
                   <iframe
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d127095.48811864792!2d-0.2941873885499206!3d5.591583274434159!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xfdf9c7c0b7b7b7b%3A0x8b8b8b8b8b8b8b8b!2sWeija%2C%20Accra!5e0!3m2!1sen!2sgh!4v1630000000000!5m2!1sen!2sgh"
@@ -362,7 +363,7 @@ const ContactPage = () => {
               </div>
 
               {/* Business Hours Card */}
-              <div className="bg-gradient-to-r from-[#8B6B4D] to-[#5D8A7A] rounded-3xl shadow-xl p-6 text-white">
+              <div className="bg-gradient-to-r from-[#171b17ff] to-[#5D8A7A] rounded-3xl shadow-xl p-6 text-white">
                 <h3 className="text-xl font-bold mb-4">Business Hours</h3>
                 <div className="space-y-3">
                   <div className="flex justify-between items-center">
@@ -386,14 +387,14 @@ const ContactPage = () => {
               </div>
 
               {/* Social Links Card */}
-              <div className="bg-white rounded-3xl shadow-xl p-6">
+              <div className="bg-white rounded-sm shadow-lg p-6">
                 <h3 className="text-xl font-bold text-gray-900 mb-4">Connect With Us</h3>
                 <div className="flex flex-wrap gap-3">
                   <a
                     href="https://instagram.com/kings_paintdepotgh"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 min-w-[120px] bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-3 rounded-xl font-medium hover:shadow-lg transition-all flex items-center justify-center gap-2"
+                    className="flex-1 min-w-[120px] bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-3 rounded-sm font-medium hover:shadow-lg transition-all flex items-center justify-center gap-2"
                   >
                     <Instagram className="w-5 h-5" />
                     Instagram
@@ -402,7 +403,7 @@ const ContactPage = () => {
                     href="https://facebook.com/kingspaintdepot"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 min-w-[120px] bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-3 rounded-xl font-medium hover:shadow-lg transition-all flex items-center justify-center gap-2"
+                    className="flex-1 min-w-[120px] bg-gradient-to-r from-blue-600 to-blue-700 text-white px-4 py-3 rounded-sm font-medium hover:shadow-lg transition-all flex items-center justify-center gap-2"
                   >
                     <Facebook className="w-5 h-5" />
                     Facebook
@@ -411,7 +412,7 @@ const ContactPage = () => {
                     href="https://twitter.com/kingspaintdepot"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 min-w-[120px] bg-gradient-to-r from-sky-400 to-sky-500 text-white px-4 py-3 rounded-xl font-medium hover:shadow-lg transition-all flex items-center justify-center gap-2"
+                    className="flex-1 min-w-[120px] bg-gradient-to-r from-sky-400 to-sky-500 text-white px-4 py-3 rounded-sm font-medium hover:shadow-lg transition-all flex items-center justify-center gap-2"
                   >
                     <Twitter className="w-5 h-5" />
                     Twitter
@@ -434,78 +435,98 @@ const ContactPage = () => {
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-16 bg-white">
-        <div className="container mx-auto px-4 max-w-4xl">
+    {/* FAQ Section */}
+<section className="py-16 bg-white">
+  <div className="container mx-auto px-4">
+
+    {/* Section Header */}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      className="text-center mb-12 max-w-3xl mx-auto"
+    >
+      <span className="text-amber-600 font-medium tracking-wider mb-3 block">
+        HAVE QUESTIONS?
+      </span>
+
+      <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+        Frequently Asked Questions
+      </h2>
+
+      <p className="text-gray-600">
+        Find answers to common questions about our products and services
+      </p>
+    </motion.div>
+
+    {/* Two Column Layout */}
+    <div className="grid lg:grid-cols-2 gap-12 items-center">
+
+      {/* FAQ Left */}
+      <div className="space-y-4">
+        {faqs.map((faq, index) => (
           <motion.div
+            key={index}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
+            transition={{ delay: index * 0.1 }}
             viewport={{ once: true }}
-            className="text-center mb-12"
+            className="border border-gray-200 rounded-md overflow-hidden"
           >
-            <span className="text-[#8B6B4D] font-medium tracking-wider mb-3 block">
-              HAVE QUESTIONS?
-            </span>
-            <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-              Frequently Asked <span className="text-[#C4A962]">Questions</span>
-            </h2>
-            <p className="text-gray-600 max-w-2xl mx-auto">
-              Find answers to common questions about our products and services
-            </p>
-          </motion.div>
+            <button
+              onClick={() => toggleFaq(index)}
+              className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors cursor-pointer"
+            >
+              <span className="font-semibold text-gray-900">
+                {faq.question}
+              </span>
 
-          <div className="space-y-4">
-            {faqs.map((faq, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="border border-gray-200 rounded-xl overflow-hidden"
-              >
-                <button
-                  onClick={() => toggleFaq(index)}
-                  className="w-full flex items-center justify-between p-6 text-left hover:bg-gray-50 transition-colors"
-                >
-                  <span className="font-semibold text-gray-900">{faq.question}</span>
-                  <ChevronRight
-                    className={`w-5 h-5 text-[#8B6B4D] transition-transform duration-300 ${
-                      activeFaq === index ? 'rotate-90' : ''
-                    }`}
-                  />
-                </button>
-                
-                <motion.div
-                  initial={{ height: 0 }}
-                  animate={{ height: activeFaq === index ? 'auto' : 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="overflow-hidden"
-                >
-                  <div className="p-6 pt-0 border-t border-gray-100">
-                    <p className="text-gray-600">{faq.answer}</p>
-                  </div>
-                </motion.div>
-              </motion.div>
-            ))}
-          </div>
+              <ChevronRight
+                className={`w-5 h-5 text-[#8B6B4D] transition-transform duration-300 ${
+                  activeFaq === index ? "rotate-90" : ""
+                }`}
+              />
+            </button>
 
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-            className="text-center mt-8"
-          >
-            <p className="text-gray-500">
-              Still have questions?{' '}
-              <Link to="/faq" className="text-[#8B6B4D] hover:text-[#C4A962] font-medium">
-                Visit our full FAQ page
-              </Link>
-            </p>
+            <motion.div
+              initial={{ height: 0 }}
+              animate={{ height: activeFaq === index ? "auto" : 0 }}
+              transition={{ duration: 0.3 }}
+              className="overflow-hidden"
+            >
+              <div className="p-6 pt-0 border-t border-gray-100">
+                <p className="text-gray-600">{faq.answer}</p>
+              </div>
+            </motion.div>
           </motion.div>
-        </div>
-      </section>
+        ))}
+
+       
+      </div>
+
+      {/* Large Image Right */}
+      <motion.div
+        initial={{ opacity: 0, x: 40 }}
+        whileInView={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.7 }}
+        viewport={{ once: true }}
+        className="relative"
+      >
+        <img
+          src="/images/faq.avif"
+          alt="Paint professionals assisting customers"
+          className="w-full h-[500px] object-cover rounded-sm shadow-md"
+        />
+
+        {/* Decorative Glow */}
+        <div className="absolute -bottom-6 -right-6 w-48 h-48 bg-[#C4A962]/20 blur-3xl rounded-full -z-10"></div>
+      </motion.div>
+
+    </div>
+  </div>
+</section>
+
 
       {/* CTA Section */}
       <section className="py-16 bg-gradient-to-r from-[#0a120a] to-[#1a2a1a]">
@@ -516,7 +537,7 @@ const ContactPage = () => {
             transition={{ duration: 0.6 }}
             className="max-w-3xl mx-auto"
           >
-            <HelpCircle className="w-16 h-16 text-[#C4A962] mx-auto mb-6" />
+            <HelpCircle className="w-16 h-16 text-amber-900 mx-auto mb-6" />
             <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
               Need Expert Advice?
             </h2>
@@ -525,7 +546,7 @@ const ContactPage = () => {
             </p>
             <Link
               to="/products"
-              className="inline-flex items-center gap-2 bg-[#C4A962] text-black px-8 py-4 rounded-xl font-semibold hover:bg-[#8B6B4D] hover:text-white transition-all duration-300 shadow-xl hover:shadow-2xl"
+              className="inline-flex items-center gap-2 bg-amber-900 text-white/60 px-8 py-4 rounded-sm font-semibold hover:bg-[#8B6B4D] hover:text-white transition-all duration-300 shadow-xl hover:shadow-2xl"
             >
               Browse Products
               <ChevronRight className="w-5 h-5" />
@@ -533,6 +554,10 @@ const ContactPage = () => {
           </motion.div>
         </div>
       </section>
+
+{/* Partners Marquee */}
+      <PartnersMarquee />
+
     </div>
   )
 }
