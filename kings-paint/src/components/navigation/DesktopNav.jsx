@@ -259,6 +259,7 @@ const DesktopNav = () => {
               <div className="flex items-center space-x-1">
                 {[
                   { to: "/products", label: "Products" },
+                  { to: "/discover", label: "Discover" },
                   { to: "/about", label: "About" },
                   { to: "/contact", label: "Contact" },
                 ].map((link) => (

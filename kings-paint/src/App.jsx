@@ -4,7 +4,9 @@ import { useEffect } from 'react'
 import { Toaster } from 'react-hot-toast'
 import MainLayout from '@layouts/MainLayout'
 import HomePage from '@pages/HomePage'
+import DiscoverPage from '@pages/DiscoverPage'
 import AboutPage from '@pages/AboutPage'
+import ContactPage from '@pages/ContactPage'
 import ProductsPage from '@pages/ProductsPage'
 import ProductDetailPage from '@pages/ProductDetailPage'
 import CategoryPage from '@pages/CategoryPage'
@@ -49,7 +51,10 @@ function App() {
       <Routes>
         <Route path="/" element={<MainLayout />}>
           <Route index element={<HomePage />} />
+          <Route path='discover' element={<DiscoverPage />} />
           <Route path="about" element={<AboutPage />} />
+          <Route path='contact' element={<ContactPage />} />
+          
 
           {/* ✅ Static segment first — must come before :id or it gets swallowed */}
           <Route path="products/category/:category" element={<CategoryPage />} />

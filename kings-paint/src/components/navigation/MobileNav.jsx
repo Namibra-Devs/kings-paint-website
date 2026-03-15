@@ -22,6 +22,7 @@ import {
   Facebook,
   Twitter,
   Tag,
+  Compass,
   Palette
 } from 'lucide-react'
 import useCartStore from '@store/cartStore'
@@ -33,6 +34,7 @@ const MobileNav = () => {
   const menuItems = [
     { name: 'Home', path: '/', icon: Home },
     { name: 'Products', path: '/products', icon: Package },
+    { name: 'Discover', path: '/discover', icon: Compass },
     { name: 'About', path: '/about', icon: Info },
     { name: 'Loyalty Points', path: '/loyalty', icon: Star },
     { name: 'Wishlist', path: '/wishlist', icon: Heart },
