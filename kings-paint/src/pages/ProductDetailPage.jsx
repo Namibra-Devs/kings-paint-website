@@ -1,8 +1,8 @@
 // src/pages/ProductDetailPage.jsx
-import { useState, useEffect } from 'react'
-import { useParams, Link, useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { 
+import { useState, useEffect } from "react";
+import { useParams, Link, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
+import {
   ShoppingCart,
   Heart,
   Star,
@@ -29,27 +29,27 @@ import {
   Wind,
   Zap,
   Volume2,
-  Hash
-} from 'lucide-react'
-import useCartStore from '@store/cartStore'
-import useWishlistStore from '@store/wishlistStore'
-import useLoyaltyStore from '@store/loyaltyStore'
-import toast from 'react-hot-toast'
-import ProductCard from '@components/ProductCard'
+  Hash,
+} from "lucide-react";
+import useCartStore from "@store/cartStore";
+import useWishlistStore from "@store/wishlistStore";
+import useLoyaltyStore from "@store/loyaltyStore";
+import toast from "react-hot-toast";
+import ProductCard from "@components/ProductCard";
 
 // Category icons mapping
 const categoryIcons = {
-  'Interior': Home,
-  'Exterior': Sun,
-  'Specialty': SparklesIcon,
-  'Primers': Brush,
-  'Tools': Wrench,
-  'Wood': Droplet,
-  'Metal': Zap,
-  'Concrete': Package,
-  'Floor': Ruler,
-  'Ceiling': Wind
-}
+  Interior: Home,
+  Exterior: Sun,
+  Specialty: SparklesIcon,
+  Primers: Brush,
+  Tools: Wrench,
+  Wood: Droplet,
+  Metal: Zap,
+  Concrete: Package,
+  Floor: Ruler,
+  Ceiling: Wind,
+};
 
 // All products from your ProductsPage (24 products)
 const allProducts = [
@@ -60,29 +60,31 @@ const allProducts = [
     brand: "Benjamin Moore®",
     price: 450.99,
     oldPrice: 540.99,
-    description: "Our premium interior paint delivers exceptional coverage and a beautiful matte finish.",
-    longDescription: "Transform your living space with our premium interior paint. This professional-grade formula provides one-coat coverage and creates a durable, washable surface that stands up to daily life.",
+    description:
+      "Our premium interior paint delivers exceptional coverage and a beautiful matte finish.",
+    longDescription:
+      "Transform your living space with our premium interior paint. This professional-grade formula provides one-coat coverage and creates a durable, washable surface that stands up to daily life.",
     image: "/images/interior.png",
     images: [
       "/images/interior.png",
       "/images/discover5.webp",
       "/images/texture1.avif",
-      "/images/silver.avif"
+      "/images/silver.avif",
     ],
     rating: 4.5,
     reviews: 128,
     category: "Interior",
     specifications: {
-      "Coverage": "400 sq ft per gallon",
+      Coverage: "400 sq ft per gallon",
       "Drying Time": "1 hour to touch, 4 hours to recoat",
-      "Finish": "Matte",
-      "Base": "Water-based",
-      "VOC Level": "< 50 g/L"
+      Finish: "Matte",
+      Base: "Water-based",
+      "VOC Level": "< 50 g/L",
     },
     features: [
       "One-coat coverage on most surfaces",
       "Advanced stain-resistant technology",
-      "Low odor, low VOC formula"
+      "Low odor, low VOC formula",
     ],
     finishes: ["Matte", "Eggshell", "Satin", "Semi-Gloss"],
     sizes: ["1 Quart", "1 Gallon", "5 Gallons"],
@@ -90,53 +92,55 @@ const allProducts = [
       { name: "White", code: "#FFFFFF" },
       { name: "Off White", code: "#F5F5F5" },
       { name: "Beige", code: "#F5F5DC" },
-      { name: "Gray", code: "#808080" }
+      { name: "Gray", code: "#808080" },
     ],
     inStock: true,
     sku: "KP-INT-001",
     tags: ["premium", "matte", "interior"],
-    volume: "1 Gallon"
+    volume: "1 Gallon",
   },
   {
     id: 2,
     name: "WeatherShield Exterior Paint - Satin",
     brand: "SHERWIN WILLIAMS",
     price: 520.99,
-    description: "Weather-resistant exterior paint designed to protect and beautify your home's exterior.",
-    longDescription: "Protect your home from the elements with our premium exterior paint. This advanced formula provides exceptional durability against rain, sun, and temperature changes.",
+    description:
+      "Weather-resistant exterior paint designed to protect and beautify your home's exterior.",
+    longDescription:
+      "Protect your home from the elements with our premium exterior paint. This advanced formula provides exceptional durability against rain, sun, and temperature changes.",
     image: "/images/exterior.png",
     images: [
       "/images/exterior.png",
       "/images/discover1.webp",
       "/images/storms2.webp",
-      "/images/paint-service.avif"
+      "/images/paint-service.avif",
     ],
     rating: 4.8,
     reviews: 95,
     category: "Exterior",
     specifications: {
-      "Coverage": "350 sq ft per gallon",
+      Coverage: "350 sq ft per gallon",
       "Drying Time": "2 hours to touch, 6 hours to recoat",
-      "Finish": "Satin",
-      "Base": "Acrylic",
-      "VOC Level": "< 100 g/L"
+      Finish: "Satin",
+      Base: "Acrylic",
+      "VOC Level": "< 100 g/L",
     },
     features: [
       "UV resistant formula prevents fading",
       "Flexible coating resists cracking",
-      "Mildew resistant finish"
+      "Mildew resistant finish",
     ],
     finishes: ["Satin", "Semi-Gloss", "Gloss"],
     sizes: ["1 Gallon", "5 Gallons"],
     colors: [
       { name: "White", code: "#FFFFFF" },
       { name: "Beige", code: "#F5F5DC" },
-      { name: "Gray", code: "#808080" }
+      { name: "Gray", code: "#808080" },
     ],
     inStock: true,
     sku: "KP-EXT-001",
     tags: ["exterior", "weather-resistant"],
-    volume: "1 Gallon"
+    volume: "1 Gallon",
   },
   {
     id: 3,
@@ -144,40 +148,42 @@ const allProducts = [
     brand: "LuxePaint",
     price: 890.99,
     oldPrice: 1090.99,
-    description: "Luxurious metallic finish that adds a touch of elegance to any space.",
-    longDescription: "Elevate your space with our premium metallic finish. This specialty paint contains fine metallic particles that create a stunning, reflective surface.",
+    description:
+      "Luxurious metallic finish that adds a touch of elegance to any space.",
+    longDescription:
+      "Elevate your space with our premium metallic finish. This specialty paint contains fine metallic particles that create a stunning, reflective surface.",
     image: "/images/metal.jpeg",
     images: [
       "/images/metal.jpeg",
       "/images/cowboy1.webp",
-      "/images/inkjet1.webp"
+      "/images/inkjet1.webp",
     ],
     rating: 4.6,
     reviews: 67,
     category: "Specialty",
     specifications: {
-      "Coverage": "300 sq ft per gallon",
+      Coverage: "300 sq ft per gallon",
       "Drying Time": "2 hours to touch, 8 hours to recoat",
-      "Finish": "Metallic",
-      "Base": "Solvent-based",
-      "VOC Level": "< 200 g/L"
+      Finish: "Metallic",
+      Base: "Solvent-based",
+      "VOC Level": "< 200 g/L",
     },
     features: [
       "Light-reflecting metallic particles",
       "Rich, luxurious appearance",
-      "Durable finish"
+      "Durable finish",
     ],
     finishes: ["Gold", "Silver", "Bronze", "Copper"],
     sizes: ["1 Quart", "1 Gallon"],
     colors: [
       { name: "Gold", code: "#C4A962" },
       { name: "Silver", code: "#C0C0C0" },
-      { name: "Bronze", code: "#8B6B4D" }
+      { name: "Bronze", code: "#8B6B4D" },
     ],
     inStock: true,
     sku: "KP-SPC-001",
     tags: ["specialty", "metallic"],
-    volume: "1 Quart"
+    volume: "1 Quart",
   },
   {
     id: 4,
@@ -185,37 +191,32 @@ const allProducts = [
     brand: "GreenCoat",
     price: 320.99,
     description: "Environmentally friendly primer with zero VOCs.",
-    longDescription: "Create a healthy living environment with our zero-VOC primer. This eco-friendly formula provides excellent adhesion and coverage without harmful emissions.",
+    longDescription:
+      "Create a healthy living environment with our zero-VOC primer. This eco-friendly formula provides excellent adhesion and coverage without harmful emissions.",
     image: "/images/eco.png",
-    images: [
-      "/images/eco.png",
-      "/images/paint1.png",
-      "/images/gala1.webp"
-    ],
+    images: ["/images/eco.png", "/images/paint1.png", "/images/gala1.webp"],
     rating: 4.3,
     reviews: 156,
     category: "Primers",
     specifications: {
-      "Coverage": "400 sq ft per gallon",
+      Coverage: "400 sq ft per gallon",
       "Drying Time": "30 minutes to touch, 2 hours to recoat",
-      "Finish": "Flat",
-      "Base": "Water-based",
-      "VOC Level": "0 g/L"
+      Finish: "Flat",
+      Base: "Water-based",
+      "VOC Level": "0 g/L",
     },
     features: [
       "Zero VOCs - safe for indoor use",
       "Excellent adhesion",
-      "Stain blocking"
+      "Stain blocking",
     ],
     finishes: ["Flat"],
     sizes: ["1 Quart", "1 Gallon", "5 Gallons"],
-    colors: [
-      { name: "White", code: "#FFFFFF" }
-    ],
+    colors: [{ name: "White", code: "#FFFFFF" }],
     inStock: true,
     sku: "KP-PRM-001",
     tags: ["primer", "eco-friendly"],
-    volume: "1 Gallon"
+    volume: "1 Gallon",
   },
   {
     id: 5,
@@ -223,106 +224,99 @@ const allProducts = [
     brand: "ProTools",
     price: 240.99,
     oldPrice: 290.99,
-    description: "Complete roller set with everything you need for professional results.",
-    longDescription: "Achieve professional results with our complete roller set. Includes heavy-duty roller frame, three roller covers, and durable paint tray.",
+    description:
+      "Complete roller set with everything you need for professional results.",
+    longDescription:
+      "Achieve professional results with our complete roller set. Includes heavy-duty roller frame, three roller covers, and durable paint tray.",
     image: "/images/tools.png",
-    images: [
-      "/images/tools.png",
-      "/images/tools3.avif",
-      "/images/street.webp"
-    ],
+    images: ["/images/tools.png", "/images/tools3.avif", "/images/street.webp"],
     rating: 4.7,
     reviews: 203,
     category: "Tools",
     specifications: {
       "Roller Size": "9 inches",
-      "Includes": "Frame, 3 covers, tray",
-      "Material": "Stainless steel"
+      Includes: "Frame, 3 covers, tray",
+      Material: "Stainless steel",
     },
     features: [
       "Professional grade quality",
       "Includes multiple nap sizes",
-      "Comfort-grip handle"
+      "Comfort-grip handle",
     ],
     sizes: ["9-inch Set", "12-inch Set"],
     inStock: true,
     sku: "KP-TOOL-001",
     tags: ["tools", "roller"],
-    volume: "Set"
+    volume: "Set",
   },
   {
     id: 6,
     name: "Ceiling Paint - Bright White",
     brand: "Benjamin Moore®",
     price: 380.99,
-    description: "Specialized ceiling paint that eliminates splatter and provides excellent coverage.",
-    longDescription: "Designed specifically for ceilings, this paint features a unique formula that reduces splatter and provides a uniform, bright white finish.",
+    description:
+      "Specialized ceiling paint that eliminates splatter and provides excellent coverage.",
+    longDescription:
+      "Designed specifically for ceilings, this paint features a unique formula that reduces splatter and provides a uniform, bright white finish.",
     image: "/images/ceiling.png",
-    images: [
-      "/images/ceiling.png",
-      "/images/ceiling2.jpg",
-      "/images/22.jpeg"
-    ],
+    images: ["/images/ceiling.png", "/images/ceiling2.jpg", "/images/22.jpeg"],
     rating: 4.4,
     reviews: 88,
     category: "Ceiling",
     specifications: {
-      "Coverage": "400 sq ft per gallon",
+      Coverage: "400 sq ft per gallon",
       "Drying Time": "1 hour to touch",
-      "Finish": "Flat",
-      "Base": "Water-based"
+      Finish: "Flat",
+      Base: "Water-based",
     },
     features: [
       "Splatter-resistant formula",
       "Excellent hide",
-      "Stain-resistant finish"
+      "Stain-resistant finish",
     ],
     finishes: ["Flat"],
     sizes: ["1 Gallon", "5 Gallons"],
-    colors: [
-      { name: "White", code: "#FFFFFF" }
-    ],
+    colors: [{ name: "White", code: "#FFFFFF" }],
     inStock: true,
     sku: "KP-CLG-001",
     tags: ["ceiling", "white"],
-    volume: "1 Gallon"
+    volume: "1 Gallon",
   },
   {
     id: 7,
     name: "Wood Stain - Natural Oak",
     brand: "WoodCraft",
     price: 280.99,
-    description: "Premium wood stain that enhances the natural beauty of wood grains.",
-    longDescription: "Bring out the natural beauty of your wood projects with our premium wood stain. Deeply penetrates to enhance grain patterns while providing lasting protection.",
+    description:
+      "Premium wood stain that enhances the natural beauty of wood grains.",
+    longDescription:
+      "Bring out the natural beauty of your wood projects with our premium wood stain. Deeply penetrates to enhance grain patterns while providing lasting protection.",
     image: "/images/wood-stain.png",
-    images: [
-      "/images/paint10.png",
-      "/images/door4.jpeg"
-    ],
+    images: ["/images/paint10.png", "/images/door4.jpeg"],
     rating: 4.5,
     reviews: 112,
     category: "Wood",
     specifications: {
-      "Coverage": "200 sq ft per quart",
+      Coverage: "200 sq ft per quart",
       "Drying Time": "2 hours",
-      "Finish": "Satin",
-      "Base": "Oil-based"
+      Finish: "Satin",
+      Base: "Oil-based",
     },
     features: [
       "Enhances natural wood grain",
       "Rich, warm color",
-      "UV protection"
+      "UV protection",
     ],
     finishes: ["Natural Oak", "Walnut", "Mahogany", "Cherry"],
     sizes: ["1 Quart", "1 Gallon"],
     colors: [
       { name: "Oak", code: "#D2B48C" },
-      { name: "Walnut", code: "#5C4033" }
+      { name: "Walnut", code: "#5C4033" },
     ],
     inStock: true,
     sku: "KP-WD-001",
     tags: ["wood", "stain"],
-    volume: "1 Quart"
+    volume: "1 Quart",
   },
   {
     id: 8,
@@ -330,37 +324,36 @@ const allProducts = [
     brand: "DuraCoat",
     price: 480.99,
     oldPrice: 540.99,
-    description: "Specialized bathroom paint with built-in mold and mildew protection.",
-    longDescription: "Keep your bathroom fresh and clean with our anti-mold paint. The advanced formula actively resists mold and mildew growth while providing a moisture-resistant barrier.",
-    image: "/images/bathroom.png",
-    images: [
-      "/images/con1.jpeg",
-      "/images/terra.avif"
-    ],
+    description:
+      "Specialized bathroom paint with built-in mold and mildew protection.",
+    longDescription:
+      "Keep your bathroom fresh and clean with our anti-mold paint. The advanced formula actively resists mold and mildew growth while providing a moisture-resistant barrier.",
+    image: "/images/sand1.jpg",
+    images: ["/images/sand1.jpg", "/images/con1.jpeg", "/images/terra.avif"],
     rating: 4.9,
     reviews: 76,
     category: "Specialty",
     specifications: {
-      "Coverage": "350 sq ft per gallon",
+      Coverage: "350 sq ft per gallon",
       "Drying Time": "2 hours",
-      "Finish": "Satin",
-      "Mold Resistance": "Yes"
+      Finish: "Satin",
+      "Mold Resistance": "Yes",
     },
     features: [
       "Anti-microbial protection",
       "Moisture resistant",
-      "Easy to clean"
+      "Easy to clean",
     ],
     finishes: ["Satin", "Semi-Gloss"],
     sizes: ["1 Gallon", "5 Gallons"],
     colors: [
       { name: "White", code: "#FFFFFF" },
-      { name: "Blue", code: "#E0F2FE" }
+      { name: "Blue", code: "#E0F2FE" },
     ],
     inStock: true,
     sku: "KP-BATH-001",
     tags: ["bathroom", "anti-mold"],
-    volume: "1 Gallon"
+    volume: "1 Gallon",
   },
   {
     id: 9,
@@ -368,39 +361,32 @@ const allProducts = [
     brand: "DuraCoat",
     price: 420.99,
     description: "Durable, washable finish perfect for high-moisture areas.",
-    longDescription: "Specially formulated for kitchens and bathrooms, this paint creates a durable, washable surface that stands up to humidity and frequent cleaning.",
+    longDescription:
+      "Specially formulated for kitchens and bathrooms, this paint creates a durable, washable surface that stands up to humidity and frequent cleaning.",
     image: "/images/kitchen.avif",
-    images: [
-      "/images/cherish.avif",
-      "/images/egg.jpeg"
-    ],
+    images: ["/images/cherish.avif", "/images/egg.jpeg"],
     rating: 4.5,
     reviews: 92,
     category: "Specialty",
     specifications: {
-      "Coverage": "350 sq ft per gallon",
+      Coverage: "350 sq ft per gallon",
       "Drying Time": "2 hours",
-      "Finish": "Satin",
-      "Washability": "Excellent"
+      Finish: "Satin",
+      Washability: "Excellent",
     },
-    features: [
-      "Scrubbable finish",
-      "Moisture resistant",
-      "Stain resistant"
-    ],
+    features: ["Scrubbable finish", "Moisture resistant", "Stain resistant"],
     finishes: ["Satin", "Semi-Gloss"],
     sizes: ["1 Gallon", "5 Gallons"],
     colors: [
       { name: "White", code: "#FFFFFF" },
-      { name: "Cream", code: "#FFFDD0" }
+      { name: "Cream", code: "#FFFDD0" },
     ],
     inStock: true,
     sku: "KP-KITCH-001",
     tags: ["kitchen", "bathroom"],
-    volume: "1 Gallon"
+    volume: "1 Gallon",
   },
-  // Continue with products 10-24 following the same pattern...
-  // For brevity, I've shown 9 products. You'll need to add all 24.
+
   {
     id: 10,
     name: "Floor & Patio Epoxy Coating",
@@ -417,77 +403,465 @@ const allProducts = [
     sizes: ["1 Gallon", "5 Gallons"],
     inStock: true,
     sku: "KP-FLR-001",
-    volume: "1 Gallon"
-  }
-  // ... Add products 11-24 here following the same format
-]
+    volume: "1 Gallon",
+  },
+  {
+    id: 11,
+    name: "Living Room Premium Paint",
+    brand: "Benjamin Moore®",
+    price: 480.99,
+    description: "Premium paint designed for elegant living spaces.",
+    longDescription:
+      "Transform your living room with a premium paint designed to deliver smooth coverage, rich color depth, and a luxurious finish that elevates your home's central gathering space.",
+    image: "/images/egg.jpeg",
+    images: [
+      "/images/egg.jpeg",
+      "/images/discover5.webp",
+      "/images/texture1.avif",
+    ],
+    rating: 4.7,
+    reviews: 156,
+    category: "Interior",
+    specifications: {
+      Coverage: "400 sq ft per gallon",
+      "Drying Time": "1 hour to touch, 4 hours to recoat",
+      Finish: "Eggshell",
+      Base: "Water-based",
+    },
+    features: [
+      "Smooth elegant finish",
+      "Excellent color retention",
+      "Low odor formula",
+    ],
+    finishes: ["Matte", "Eggshell", "Satin"],
+    sizes: ["1 Gallon", "5 Gallons"],
+    colors: [
+      { name: "Cream", code: "#FFFDD0" },
+      { name: "Soft Gray", code: "#D3D3D3" },
+    ],
+    inStock: true,
+    sku: "KP-LR-001",
+    tags: ["interior", "living-room"],
+    volume: "1 Gallon",
+  },
+
+  {
+    id: 12,
+    name: "Bedroom Soft Matt Paint",
+    brand: "Dulux",
+    price: 420.99,
+    description: "Soft matt paint designed for relaxing bedroom spaces.",
+    longDescription:
+      "Create a calm and cozy atmosphere in your bedroom with our soft matt paint that offers a smooth finish and soothing color tones perfect for restful environments.",
+    image: "/images/lost-souls.webp",
+    images: [
+      "/images/lost-souls.webp",
+      "/images/lost-souls1.webp",
+      "/images/egg.jpeg",
+    ],
+    rating: 4.6,
+    reviews: 134,
+    category: "Interior",
+    specifications: {
+      Coverage: "380 sq ft per gallon",
+      "Drying Time": "1 hour",
+      Finish: "Matt",
+      Base: "Water-based",
+    },
+    features: ["Smooth matt finish", "Low odor", "Easy application"],
+    finishes: ["Matt"],
+    sizes: ["1 Gallon", "5 Gallons"],
+    colors: [
+      { name: "Lavender", code: "#E6E6FA" },
+      { name: "Sky Blue", code: "#87CEEB" },
+    ],
+    inStock: true,
+    sku: "KP-BED-001",
+    tags: ["bedroom", "interior"],
+    volume: "1 Gallon",
+  },
+
+  {
+    id: 13,
+    name: "Exterior Wood Paint",
+    brand: "WoodCraft",
+    price: 550.99,
+    description: "Protective paint for outdoor wooden surfaces.",
+    longDescription:
+      "Designed to protect exterior wooden surfaces from harsh weather conditions while enhancing the natural beauty of wood.",
+    image: "/images/acrylic.webp",
+    images: ["/images/acrylic.webp"],
+    rating: 4.5,
+    reviews: 67,
+    category: "Exterior",
+    specifications: {
+      Coverage: "320 sq ft per gallon",
+      "Drying Time": "2 hours",
+      Finish: "Satin",
+      Base: "Oil-based",
+    },
+    features: ["UV resistant", "Protects wood surfaces", "Water resistant"],
+    finishes: ["Satin", "Semi-Gloss"],
+    sizes: ["1 Gallon"],
+    inStock: true,
+    sku: "KP-EXTWD-001",
+    tags: ["exterior", "wood"],
+    volume: "1 Gallon",
+  },
+
+  {
+    id: 14,
+    name: "Facade Paint - Long Lasting",
+    brand: "PPG",
+    price: 590.99,
+    description: "Durable paint designed for building facades.",
+    longDescription:
+      "High-performance facade paint designed to provide superior protection and color retention for exterior walls and building facades.",
+    image: "/images/22.jpeg",
+    images: ["/images/22.jpeg", "/images/ex1.webp"],
+    rating: 4.7,
+    reviews: 89,
+    category: "Exterior",
+    specifications: {
+      Coverage: "350 sq ft per gallon",
+      "Drying Time": "2 hours",
+      Finish: "Satin",
+    },
+    features: ["Fade resistant", "Weather resistant", "Crack resistant"],
+    finishes: ["Satin"],
+    sizes: ["1 Gallon", "5 Gallons"],
+    inStock: true,
+    sku: "KP-FAC-001",
+    tags: ["exterior", "facade"],
+    volume: "1 Gallon",
+  },
+
+  {
+    id: 15,
+    name: "Chalkboard Paint - Black",
+    brand: "LuxePaint",
+    price: 320.99,
+    description: "Transform surfaces into writable chalkboards.",
+    longDescription:
+      "Create fun and functional chalkboard surfaces on walls, furniture, or doors using our premium chalkboard paint.",
+    image: "/images/flat.jpeg",
+    images: [
+      "/images/flat.jpeg",
+      "/images/silver.avif",
+      "/images/texture1.avif",
+    ],
+    rating: 4.5,
+    reviews: 45,
+    category: "Specialty",
+    specifications: {
+      Coverage: "100 sq ft per quart",
+      Finish: "Matte",
+      "Drying Time": "1 hour",
+    },
+    features: ["Writable surface", "Durable finish", "Easy to clean"],
+    finishes: ["Matte"],
+    sizes: ["1 Quart"],
+    inStock: true,
+    sku: "KP-CHK-001",
+    tags: ["chalkboard"],
+    volume: "1 Quart",
+  },
+
+  {
+    id: 16,
+    name: "Magnetic Paint",
+    brand: "LuxePaint",
+    price: 420.99,
+    description: "Special paint that turns walls into magnetic surfaces.",
+    longDescription:
+      "Create interactive magnetic surfaces on walls for offices, classrooms, or homes with this innovative magnetic paint.",
+    image: "/images/mag.jpeg",
+    images: ["/images/mag.jpeg", "/images/discover1.webp"],
+    rating: 4.3,
+    reviews: 34,
+    category: "Specialty",
+    specifications: {
+      Coverage: "80 sq ft per quart",
+      Finish: "Matte",
+    },
+    features: [
+      "Magnet receptive surface",
+      "Ideal for offices",
+      "Easy application",
+    ],
+    finishes: ["Matte"],
+    sizes: ["1 Quart"],
+    inStock: true,
+    sku: "KP-MAG-001",
+    tags: ["magnetic"],
+    volume: "1 Quart",
+  },
+
+  {
+    id: 17,
+    name: "All-Purpose Primer",
+    brand: "Benjamin Moore®",
+    price: 280.99,
+    description: "Versatile primer for most surfaces.",
+    longDescription:
+      "An all-purpose primer designed to provide excellent adhesion and create the perfect base coat for interior and exterior paints.",
+    image: "/images/primer3.jpeg",
+    images: ["/images/primer3.jpeg", "/images/urban1.webp"],
+    rating: 4.4,
+    reviews: 203,
+    category: "Primers",
+    specifications: {
+      Coverage: "400 sq ft per gallon",
+      "Drying Time": "1 hour",
+    },
+    features: [
+      "Excellent adhesion",
+      "Quick drying",
+      "Improves top coat durability",
+    ],
+    sizes: ["1 Gallon"],
+    inStock: true,
+    sku: "KP-PRM-002",
+    volume: "1 Gallon",
+  },
+
+  {
+    id: 18,
+    name: "Stain Blocking Primer",
+    brand: "SHERWIN WILLIAMS",
+    price: 350.99,
+    description: "Primer that blocks stubborn stains.",
+    longDescription:
+      "High-performance primer designed to block tough stains from smoke, water damage, and grease before painting.",
+    image: "/images/primer4.jpeg",
+    images: ["/images/primer4.jpeg", "/images/evening2.webp"],
+    rating: 4.6,
+    reviews: 178,
+    category: "Primers",
+    specifications: {
+      Coverage: "350 sq ft per gallon",
+      "Drying Time": "1 hour",
+    },
+    features: ["Stain blocking", "Fast drying", "Improves paint adhesion"],
+    sizes: ["1 Gallon"],
+    inStock: true,
+    sku: "KP-PRM-003",
+    volume: "1 Gallon",
+  },
+
+  {
+    id: 19,
+    name: "Premium Brush Set",
+    brand: "ProTools",
+    price: 180.99,
+    description: "Set of 5 premium paint brushes.",
+    longDescription:
+      "Professional brush set designed for smooth paint application and precision cutting around edges.",
+    image: "/images/brush2.jpeg",
+    images: ["/images/brush2.jpeg", "/images/brush4.jpeg", "/images/tool-set.png"],
+    rating: 4.8,
+    reviews: 312,
+    category: "Tools",
+    features: [
+      "High quality bristles",
+      "Comfort grip handle",
+      "Durable construction",
+    ],
+    sizes: ["5 Brush Set"],
+    inStock: true,
+    sku: "KP-BR-001",
+    volume: "Set",
+  },
+
+  {
+    id: 20,
+    name: "Painter's Tape - 6 Pack",
+    brand: "ProTools",
+    price: 89.99,
+    description: "Professional masking tape for painting.",
+    longDescription:
+      "High quality painter's tape designed to protect surfaces and create sharp paint lines.",
+    image: "/images/tape5.jpeg",
+    images: ["/images/tape5.jpeg", "/images/tape2.jpeg"],
+    rating: 4.5,
+    reviews: 567,
+    category: "Tools",
+    features: ["Clean removal", "Sharp paint lines", "Surface protection"],
+    sizes: ["6 Pack"],
+    inStock: true,
+    sku: "KP-TAPE-001",
+    volume: "Pack",
+  },
+
+  {
+    id: 21,
+    name: "Paint Tray & Liner Set",
+    brand: "ProTools",
+    price: 120.99,
+    description: "Durable paint tray with disposable liners.",
+    longDescription:
+      "Heavy duty paint tray with liners designed to make painting easier and cleanup faster.",
+    image: "/images/set1.jpeg",
+    images: [
+      "/images/set1.jpeg",
+      "/images/set2.jpeg",
+      "/images/set3.jpeg",
+      "/images/set4.jpeg",
+    ],
+    rating: 4.4,
+    reviews: 234,
+    category: "Tools",
+    features: ["Durable tray", "Disposable liners", "Easy cleanup"],
+    sizes: ["Standard"],
+    inStock: true,
+    sku: "KP-TRAY-001",
+    volume: "Set",
+  },
+
+  {
+    id: 22,
+    name: "Extension Pole",
+    brand: "ProTools",
+    price: 160.99,
+    description: "Adjustable extension pole for rollers.",
+    longDescription:
+      "Adjustable extension pole that allows painters to reach high walls and ceilings safely.",
+    image: "/images/pole1.jpeg",
+    images: ["/images/pole1.jpeg", "/images/pole2.jpeg"],
+    rating: 4.6,
+    reviews: 145,
+    category: "Tools",
+    features: ["Lightweight aluminum", "Adjustable length", "Comfort grip"],
+    sizes: ["8-12 ft"],
+    inStock: true,
+    sku: "KP-POLE-001",
+    volume: "Unit",
+  },
+
+  {
+    id: 23,
+    name: "Drop Cloth - 9x12",
+    brand: "ProTools",
+    price: 95.99,
+    description: "Heavy duty canvas drop cloth.",
+    longDescription:
+      "Protect floors and furniture from paint spills and splatters using this durable canvas drop cloth.",
+    image: "/images/cloth2.jpeg",
+    images: [
+      "/images/cloth2.jpeg",
+      "/images/cloth3.jpeg"
+    ],
+    rating: 4.5,
+    reviews: 267,
+    category: "Tools",
+    features: ["Reusable canvas", "Large coverage", "Heavy duty"],
+    sizes: ["9x12 ft"],
+    inStock: true,
+    sku: "KP-DRP-001",
+    volume: "Piece",
+  },
+
+  {
+    id: 24,
+    name: "Paint Mixer Attachment",
+    brand: "ProTools",
+    price: 65.99,
+    description: "Drill attachment for mixing paint.",
+    longDescription:
+      "Easily mix paint, epoxy, and coatings using this durable drill mixer attachment.",
+    image: "/images/mixer.png",
+    images: [
+      "/images/mix-close1.jpeg",
+      "/images/mix-set2.jpeg",
+      "/images/mix-set6.jpeg",
+      "/images/mix-set8.jpeg",
+      "/images/mix6.jpeg",
+      "/images/mix8.jpeg",
+    ],
+    rating: 4.7,
+    reviews: 189,
+    category: "Tools",
+    features: ["Fits standard drills", "Efficient mixing", "Durable steel"],
+    sizes: ["Standard"],
+    inStock: true,
+    sku: "KP-MIX-001",
+    volume: "Unit",
+  },
+];
 
 const ProductDetailPage = () => {
-  const { id } = useParams()
-  const navigate = useNavigate()
-  const [product, setProduct] = useState(null)
-  const [loading, setLoading] = useState(true)
-  const [quantity, setQuantity] = useState(1)
-  const [selectedImage, setSelectedImage] = useState(0)
-  const [selectedFinish, setSelectedFinish] = useState('')
-  const [selectedSize, setSelectedSize] = useState('')
-  const [activeTab, setActiveTab] = useState('description')
-  const [relatedProducts, setRelatedProducts] = useState([])
-  
-  const addToCart = useCartStore((state) => state.addItem)
-  const { toggleItem, isInWishlist } = useWishlistStore()
-  const { points, getPointsMultiplier } = useLoyaltyStore()
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [product, setProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [quantity, setQuantity] = useState(1);
+  const [selectedImage, setSelectedImage] = useState(0);
+  const [selectedFinish, setSelectedFinish] = useState("");
+  const [selectedSize, setSelectedSize] = useState("");
+  const [activeTab, setActiveTab] = useState("description");
+  const [relatedProducts, setRelatedProducts] = useState([]);
 
-  const isWishlisted = product ? isInWishlist(product.id) : false
-  const CategoryIcon = product ? categoryIcons[product.category] || Package : Package
+  const addToCart = useCartStore((state) => state.addItem);
+  const { toggleItem, isInWishlist } = useWishlistStore();
+  const { points, getPointsMultiplier } = useLoyaltyStore();
+
+  const isWishlisted = product ? isInWishlist(product.id) : false;
+  const CategoryIcon = product
+    ? categoryIcons[product.category] || Package
+    : Package;
 
   useEffect(() => {
-    setLoading(true)
-    
+    setLoading(true);
+
     // Find product by ID
     setTimeout(() => {
-      const foundProduct = allProducts.find(p => p.id === parseInt(id))
-      
+      const foundProduct = allProducts.find((p) => p.id === parseInt(id));
+
       if (foundProduct) {
-        setProduct(foundProduct)
-        setSelectedFinish(foundProduct.finishes?.[0] || '')
-        setSelectedSize(foundProduct.sizes?.[0] || '')
-        
+        setProduct(foundProduct);
+        setSelectedFinish(foundProduct.finishes?.[0] || "");
+        setSelectedSize(foundProduct.sizes?.[0] || "");
+
         // Get related products (same category, different ID)
         const related = allProducts
-          .filter(p => p.category === foundProduct.category && p.id !== foundProduct.id)
-          .slice(0, 3)
-        setRelatedProducts(related)
+          .filter(
+            (p) =>
+              p.category === foundProduct.category && p.id !== foundProduct.id,
+          )
+          .slice(0, 3);
+        setRelatedProducts(related);
       } else {
-        toast.error('Product not found')
-        navigate('/products')
+        toast.error("Product not found");
+        navigate("/products");
       }
-      
-      setLoading(false)
-    }, 500)
-  }, [id, navigate])
+
+      setLoading(false);
+    }, 500);
+  }, [id, navigate]);
 
   const handleAddToCart = () => {
-    addToCart({ 
-      ...product, 
-      quantity, 
-      finish: selectedFinish, 
+    addToCart({
+      ...product,
+      quantity,
+      finish: selectedFinish,
       size: selectedSize,
-      image: product.images[0] 
-    })
-    toast.success(`${product.name} added to cart!`)
-  }
+      image: product.images[0],
+    });
+    toast.success(`${product.name} added to cart!`);
+  };
 
   const handleWishlist = () => {
-    const added = toggleItem(product)
-    toast.success(added ? 'Added to wishlist' : 'Removed from wishlist')
-  }
+    const added = toggleItem(product);
+    toast.success(added ? "Added to wishlist" : "Removed from wishlist");
+  };
 
   const handleQuantityChange = (delta) => {
-    setQuantity(Math.max(1, quantity + delta))
-  }
+    setQuantity(Math.max(1, quantity + delta));
+  };
 
-  const pointsEarned = product ? Math.floor(product.price * quantity * (getPointsMultiplier() || 1)) : 0
+  const pointsEarned = product
+    ? Math.floor(product.price * quantity * (getPointsMultiplier() || 1))
+    : 0;
 
   if (loading) {
     return (
@@ -508,10 +882,10 @@ const ProductDetailPage = () => {
           </div>
         </div>
       </div>
-    )
+    );
   }
 
-  if (!product) return null
+  if (!product) return null;
 
   return (
     <div className="min-h-screen bg-gray-50 py-8">
@@ -520,19 +894,25 @@ const ProductDetailPage = () => {
         <nav className="text-sm mb-8">
           <ol className="flex items-center flex-wrap gap-2">
             <li>
-              <Link to="/" className="text-gray-500 hover:text-[#8B6B4D] transition-colors">
+              <Link
+                to="/"
+                className="text-gray-500 hover:text-[#8B6B4D] transition-colors"
+              >
                 Home
               </Link>
             </li>
             <ChevronRight className="w-4 h-4 text-gray-400" />
             <li>
-              <Link to="/products" className="text-gray-500 hover:text-[#8B6B4D] transition-colors">
+              <Link
+                to="/products"
+                className="text-gray-500 hover:text-[#8B6B4D] transition-colors"
+              >
                 Products
               </Link>
             </li>
             <ChevronRight className="w-4 h-4 text-gray-400" />
             <li>
-              <Link 
+              <Link
                 to={`/products/category/${product.category?.toLowerCase()}`}
                 className="text-gray-500 hover:text-[#8B6B4D] transition-colors"
               >
@@ -567,21 +947,21 @@ const ProductDetailPage = () => {
                   </span>
                 )}
               </motion.div>
-              
+
               <div className="grid grid-cols-4 gap-2">
                 {product.images.map((image, index) => (
                   <button
                     key={index}
                     onClick={() => setSelectedImage(index)}
                     className={`border-2 rounded-lg overflow-hidden transition-all ${
-                      selectedImage === index 
-                        ? 'border-[#8B6B4D] shadow-md' 
-                        : 'border-transparent hover:border-gray-300'
+                      selectedImage === index
+                        ? "border-[#8B6B4D] shadow-md"
+                        : "border-transparent hover:border-gray-300"
                     }`}
                   >
-                    <img 
-                      src={image} 
-                      alt={`${product.name} ${index + 1}`} 
+                    <img
+                      src={image}
+                      alt={`${product.name} ${index + 1}`}
                       className="w-full h-20 object-contain"
                     />
                   </button>
@@ -595,19 +975,25 @@ const ProductDetailPage = () => {
                 <div className="flex items-center justify-between mb-2">
                   <div className="flex items-center gap-2">
                     <CategoryIcon className="w-5 h-5 text-[#8B6B4D]" />
-                    <p className="text-sm text-[#8B6B4D] font-medium">{product.brand}</p>
+                    <p className="text-sm text-[#8B6B4D] font-medium">
+                      {product.brand}
+                    </p>
                   </div>
-                  <span className={`px-3 py-1 rounded-full text-xs font-medium ${
-                    product.inStock 
-                      ? 'bg-green-100 text-green-700' 
-                      : 'bg-red-100 text-red-700'
-                  }`}>
-                    {product.inStock ? 'In Stock' : 'Out of Stock'}
+                  <span
+                    className={`px-3 py-1 rounded-full text-xs font-medium ${
+                      product.inStock
+                        ? "bg-green-100 text-green-700"
+                        : "bg-red-100 text-red-700"
+                    }`}
+                  >
+                    {product.inStock ? "In Stock" : "Out of Stock"}
                   </span>
                 </div>
-                
-                <h1 className="text-3xl font-bold text-gray-800 mb-2">{product.name}</h1>
-                
+
+                <h1 className="text-3xl font-bold text-gray-800 mb-2">
+                  {product.name}
+                </h1>
+
                 <div className="flex items-center gap-4 mb-4">
                   <div className="flex items-center">
                     <div className="flex text-[#C4A962] mr-2">
@@ -615,9 +1001,9 @@ const ProductDetailPage = () => {
                         <Star
                           key={i}
                           className={`w-5 h-5 ${
-                            i < Math.floor(product.rating) 
-                              ? 'fill-[#C4A962] text-[#C4A962]' 
-                              : 'text-gray-300'
+                            i < Math.floor(product.rating)
+                              ? "fill-[#C4A962] text-[#C4A962]"
+                              : "text-gray-300"
                           }`}
                         />
                       ))}
@@ -626,14 +1012,14 @@ const ProductDetailPage = () => {
                       {product.rating} ({product.reviews} reviews)
                     </span>
                   </div>
-                  
+
                   <button
                     onClick={handleWishlist}
                     className="flex items-center gap-1 text-gray-500 hover:text-red-500 transition-colors"
                   >
                     <Heart
                       className={`w-5 h-5 ${
-                        isWishlisted ? 'fill-red-500 text-red-500' : ''
+                        isWishlisted ? "fill-red-500 text-red-500" : ""
                       }`}
                     />
                     <span className="text-sm">Wishlist</span>
@@ -662,18 +1048,26 @@ const ProductDetailPage = () => {
                     <div className="flex items-center gap-2">
                       <Award className="w-5 h-5 text-[#8B6B4D]" />
                       <div>
-                        <p className="text-sm text-gray-600">Earn with this purchase:</p>
-                        <p className="text-2xl font-bold text-[#8B6B4D]">{pointsEarned} Points</p>
+                        <p className="text-sm text-gray-600">
+                          Earn with this purchase:
+                        </p>
+                        <p className="text-2xl font-bold text-[#8B6B4D]">
+                          {pointsEarned} Points
+                        </p>
                       </div>
                     </div>
                     <div className="text-right">
                       <p className="text-sm text-gray-600">{product.volume}</p>
-                      <p className="text-lg font-semibold text-[#C4A962]">{getPointsMultiplier()}x</p>
+                      <p className="text-lg font-semibold text-[#C4A962]">
+                        {getPointsMultiplier()}x
+                      </p>
                     </div>
                   </div>
                 </div>
 
-                <p className="text-gray-600 mb-6 leading-relaxed">{product.description}</p>
+                <p className="text-gray-600 mb-6 leading-relaxed">
+                  {product.description}
+                </p>
               </div>
 
               {/* Options */}
@@ -690,8 +1084,8 @@ const ProductDetailPage = () => {
                           onClick={() => setSelectedFinish(finish)}
                           className={`px-4 py-2 border rounded-lg text-sm transition-all ${
                             selectedFinish === finish
-                              ? 'border-[#8B6B4D] bg-[#8B6B4D]/10 text-[#8B6B4D] font-medium'
-                              : 'border-gray-300 hover:border-gray-400'
+                              ? "border-[#8B6B4D] bg-[#8B6B4D]/10 text-[#8B6B4D] font-medium"
+                              : "border-gray-300 hover:border-gray-400"
                           }`}
                         >
                           {finish}
@@ -713,8 +1107,8 @@ const ProductDetailPage = () => {
                           onClick={() => setSelectedSize(size)}
                           className={`px-4 py-2 border rounded-lg text-sm transition-all ${
                             selectedSize === size
-                              ? 'border-[#8B6B4D] bg-[#8B6B4D]/10 text-[#8B6B4D] font-medium'
-                              : 'border-gray-300 hover:border-gray-400'
+                              ? "border-[#8B6B4D] bg-[#8B6B4D]/10 text-[#8B6B4D] font-medium"
+                              : "border-gray-300 hover:border-gray-400"
                           }`}
                         >
                           {size}
@@ -727,7 +1121,8 @@ const ProductDetailPage = () => {
                 {/* SKU */}
                 <div className="flex items-center gap-2 text-sm text-gray-500">
                   <Hash className="w-4 h-4" />
-                  SKU: <span className="font-mono text-gray-700">{product.sku}</span>
+                  SKU:{" "}
+                  <span className="font-mono text-gray-700">{product.sku}</span>
                 </div>
               </div>
 
@@ -751,18 +1146,18 @@ const ProductDetailPage = () => {
                     <Plus className="w-5 h-5 text-gray-600" />
                   </button>
                 </div>
-                
+
                 <button
                   onClick={handleAddToCart}
                   disabled={!product.inStock}
                   className={`flex-1 px-6 py-3 rounded-lg font-semibold transition-all flex items-center justify-center gap-2 ${
                     product.inStock
-                      ? 'bg-[#8B6B4D] text-white hover:bg-[#9B7E5E] shadow-md hover:shadow-lg'
-                      : 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      ? "bg-[#8B6B4D] text-white hover:bg-[#9B7E5E] shadow-md hover:shadow-lg"
+                      : "bg-gray-300 text-gray-500 cursor-not-allowed"
                   }`}
                 >
                   <ShoppingCart className="w-5 h-5" />
-                  {product.inStock ? 'Add to Cart' : 'Out of Stock'}
+                  {product.inStock ? "Add to Cart" : "Out of Stock"}
                 </button>
               </div>
 
@@ -771,18 +1166,26 @@ const ProductDetailPage = () => {
                 <div className="grid grid-cols-3 gap-4">
                   <div className="text-center">
                     <Truck className="w-6 h-6 mx-auto text-[#8B6B4D] mb-2" />
-                    <p className="text-sm font-medium text-gray-700">Free Shipping</p>
+                    <p className="text-sm font-medium text-gray-700">
+                      Free Shipping
+                    </p>
                     <p className="text-xs text-gray-500">On orders GH₵500+</p>
                   </div>
                   <div className="text-center">
                     <Shield className="w-6 h-6 mx-auto text-[#8B6B4D] mb-2" />
-                    <p className="text-sm font-medium text-gray-700">Quality Guarantee</p>
+                    <p className="text-sm font-medium text-gray-700">
+                      Quality Guarantee
+                    </p>
                     <p className="text-xs text-gray-500">30-day returns</p>
                   </div>
                   <div className="text-center">
                     <RefreshCw className="w-6 h-6 mx-auto text-[#8B6B4D] mb-2" />
-                    <p className="text-sm font-medium text-gray-700">Easy Returns</p>
-                    <p className="text-xs text-gray-500">Satisfaction guaranteed</p>
+                    <p className="text-sm font-medium text-gray-700">
+                      Easy Returns
+                    </p>
+                    <p className="text-xs text-gray-500">
+                      Satisfaction guaranteed
+                    </p>
                   </div>
                 </div>
               </div>
@@ -794,14 +1197,14 @@ const ProductDetailPage = () => {
         <div className="bg-white rounded-2xl shadow-lg p-6 lg:p-8 mb-8">
           <div className="border-b border-gray-200 mb-6">
             <div className="flex gap-6 overflow-x-auto">
-              {['description', 'specifications', 'features'].map((tab) => (
+              {["description", "specifications", "features"].map((tab) => (
                 <button
                   key={tab}
                   onClick={() => setActiveTab(tab)}
                   className={`pb-4 border-b-2 font-medium whitespace-nowrap capitalize transition-colors ${
                     activeTab === tab
-                      ? 'border-[#8B6B4D] text-[#8B6B4D]'
-                      : 'border-transparent text-gray-500 hover:text-[#8B6B4D]'
+                      ? "border-[#8B6B4D] text-[#8B6B4D]"
+                      : "border-transparent text-gray-500 hover:text-[#8B6B4D]"
                   }`}
                 >
                   {tab}
@@ -811,51 +1214,84 @@ const ProductDetailPage = () => {
           </div>
 
           <div className="prose max-w-none">
-            {activeTab === 'description' && (
+            {activeTab === "description" && (
               <div>
-                <p className="text-gray-600 mb-4 leading-relaxed">{product.longDescription || product.description}</p>
-                
-                {Object.keys(product.specifications).length > 0 && (
-                  <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
-                    {Object.entries(product.specifications).slice(0, 4).map(([key, value]) => (
-                      <div key={key} className="text-center p-4 bg-gray-50 rounded-lg">
-                        {key === 'Coverage' && <Ruler className="w-6 h-6 mx-auto text-[#8B6B4D] mb-2" />}
-                        {key === 'Base' && <Droplets className="w-6 h-6 mx-auto text-[#8B6B4D] mb-2" />}
-                        {key === 'Drying Time' && <Thermometer className="w-6 h-6 mx-auto text-[#8B6B4D] mb-2" />}
-                        {key === 'Finish' && <Paintbrush className="w-6 h-6 mx-auto text-[#8B6B4D] mb-2" />}
-                        <p className="text-sm font-medium text-gray-700">{key}</p>
-                        <p className="text-xs text-gray-500">{value}</p>
-                      </div>
-                    ))}
-                  </div>
-                )}
+                <p className="text-gray-600 mb-4 leading-relaxed">
+                  {product.longDescription || product.description}
+                </p>
+
+                {product.specifications &&
+                  Object.keys(product.specifications).length > 0 && (
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-8">
+                      {Object.entries(product.specifications)
+                        .slice(0, 4)
+                        .map(([key, value]) => (
+                          <div
+                            key={key}
+                            className="text-center p-4 bg-gray-50 rounded-lg"
+                          >
+                            {key === "Coverage" && (
+                              <Ruler className="w-6 h-6 mx-auto text-[#8B6B4D] mb-2" />
+                            )}
+                            {key === "Base" && (
+                              <Droplets className="w-6 h-6 mx-auto text-[#8B6B4D] mb-2" />
+                            )}
+                            {key === "Drying Time" && (
+                              <Thermometer className="w-6 h-6 mx-auto text-[#8B6B4D] mb-2" />
+                            )}
+                            {key === "Finish" && (
+                              <Paintbrush className="w-6 h-6 mx-auto text-[#8B6B4D] mb-2" />
+                            )}
+                            <p className="text-sm font-medium text-gray-700">
+                              {key}
+                            </p>
+                            <p className="text-xs text-gray-500">{value}</p>
+                          </div>
+                        ))}
+                    </div>
+                  )}
               </div>
             )}
 
-            {activeTab === 'specifications' && Object.keys(product.specifications).length > 0 && (
-              <div>
-                <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
-                  <Package className="w-5 h-5 text-[#C4A962]" />
-                  Technical Specifications
-                </h3>
-                <table className="min-w-full border border-gray-200 rounded-lg overflow-hidden">
-                  <tbody>
-                    {Object.entries(product.specifications).map(([key, value], index) => (
-                      <tr key={key} className={index % 2 === 0 ? 'bg-gray-50' : 'bg-white'}>
-                        <td className="py-3 px-4 font-medium text-gray-700 border-b border-gray-200">{key}</td>
-                        <td className="py-3 px-4 text-gray-600 border-b border-gray-200">{value}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
+            {activeTab === "specifications" &&
+              Object.keys(product.specifications).length > 0 && (
+                <div>
+                  <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
+                    <Package className="w-5 h-5 text-[#C4A962]" />
+                    Technical Specifications
+                  </h3>
+                  <table className="min-w-full border border-gray-200 rounded-lg overflow-hidden">
+                    <tbody>
+                      {Object.entries(product.specifications).map(
+                        ([key, value], index) => (
+                          <tr
+                            key={key}
+                            className={
+                              index % 2 === 0 ? "bg-gray-50" : "bg-white"
+                            }
+                          >
+                            <td className="py-3 px-4 font-medium text-gray-700 border-b border-gray-200">
+                              {key}
+                            </td>
+                            <td className="py-3 px-4 text-gray-600 border-b border-gray-200">
+                              {value}
+                            </td>
+                          </tr>
+                        ),
+                      )}
+                    </tbody>
+                  </table>
+                </div>
+              )}
 
-            {activeTab === 'specifications' && Object.keys(product.specifications).length === 0 && (
-              <p className="text-gray-500 text-center py-8">Specifications coming soon</p>
-            )}
+            {activeTab === "specifications" &&
+              Object.keys(product.specifications).length === 0 && (
+                <p className="text-gray-500 text-center py-8">
+                  Specifications coming soon
+                </p>
+              )}
 
-            {activeTab === 'features' && (
+            {activeTab === "features" && (
               <div>
                 <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
                   <Sparkles className="w-5 h-5 text-[#C4A962]" />
@@ -877,7 +1313,9 @@ const ProductDetailPage = () => {
         {/* Related Products */}
         {relatedProducts.length > 0 && (
           <div>
-            <h2 className="text-2xl font-bold text-gray-800 mb-6">You May Also Like</h2>
+            <h2 className="text-2xl font-bold text-gray-800 mb-6">
+              You May Also Like
+            </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {relatedProducts.map((relatedProduct) => (
                 <ProductCard key={relatedProduct.id} product={relatedProduct} />
@@ -887,7 +1325,7 @@ const ProductDetailPage = () => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProductDetailPage
+export default ProductDetailPage;

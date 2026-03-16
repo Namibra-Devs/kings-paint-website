@@ -90,7 +90,7 @@ const Footer = () => {
             </Link>
             
             <p className="text-gray-400 text-sm mb-4 leading-relaxed">
-              Your trusted partner for premium paints and coatings in Ghana. 
+              Your trusted partner for premium paints and coatings in West Africa. 
               Transforming spaces with quality and innovation since 1995.
             </p>
             
