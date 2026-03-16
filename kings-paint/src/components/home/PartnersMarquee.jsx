@@ -6,13 +6,13 @@ const PartnersMarquee = () => {
   const partners = [
     { id: 1, name: "BENJAMIN MOORE" },
     { id: 2, name: "SHERWIN WILLIAMS" },
-    { id: 3, name: "DULUX" },
-    { id: 4, name: "PPG" },
+    { id: 3, name: "REMMERS" },
+    { id: 4, name: "QUALYVINYL" },
     { id: 5, name: "BEHR" },
-    { id: 6, name: "VALSPAR" },
-    { id: 7, name: "JOTUN" },
-    { id: 8, name: "SIKKENS" },
-    { id: 9, name: "CAPAROL" },
+    { id: 6, name: "KINGS PAINT" },
+    { id: 7, name: "SHERWIN WILLIAMS" },
+    { id: 8, name: "BEHR" },
+    { id: 9, name: "BENJAMIN MOORE" },
     { id: 10, name: "TEKNOS" }
   ]
 
